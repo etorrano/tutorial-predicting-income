@@ -2,7 +2,9 @@
 **An end-to-end machine learning example using Pandas and Scikit-Learn**    
 _by Benjamin Bengfort and Rebecca Bilbro, adapted from a post originally posted on the [District Data Labs blog](http://blog.districtdatalabs.com/)_      
 
-One of the machine learning workshops we give to the students in our [courses](http://www.districtdatalabs.com/courses/) is to build a classification, regression, or clustering model using one of the [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.html) datasets. The idea behind the workshop is to ingest data from a website, perform some initial analyses to get a sense for what's in the data, then structure the data to fit a Scikit-Learn model and evaluate the results. Although the repository does give advice as to what types of machine learning might be applied, this workshop still poses a challenge, especially in terms of data wrangling.
+One of the first steps for many of those to getting into data science is learning how to build simple machine learning models using an open data set. For those who are interested in experimenting with building classification, regression, or clustering models, the [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.html) is a great resources for open datasets, which have already been categorized by the machine learning tasks most appropriate for that dataset.
+
+This tutorial will provide an end-to-end example of how to do just that using the Python programming language. We'll start by ingesting data from the UCI website, performing some initial exploratory analyses to get a sense for what's in the data, structure the data to fit a Scikit-Learn model and evaluate the results. Although the UCI repository does give advice as to what types of machine learning might be applied, we'll see through the tutorial that there is still much data wrangling and clever programming needed in order to create an effective classifier.
 
 For those new to machine learning or to Scikit-Learn, we hope this is a practical example that may shed light on many challenges that crop up when developing predictive models. For more experienced readers, we hope that we can challenge you to try this workshop and refine the classifier with additional hyperparameter tuning!
 
@@ -73,8 +75,8 @@ names = [
     'income',
 ]
 
-data = pd.read_csv('data/adult.data', names=names)
-data.head()
+data = pd.read_csv('data/adult.data', sep="\s*,", names=names)
+print data.head()
 ```
 
 <div>
@@ -196,13 +198,14 @@ data.head()
 
 
 
-Because the CSV data doesn't have a header row, we had to supply the names directly to the `pd.read_csv` function. To get these names, we manually constructed the list by reading the `adult.names` file. In the future, we'll store these names as a machine readable JSON file so that we don't have to manuually construct it.
+Because the CSV data doesn't have a header row, we had to supply the names directly to the `pd.read_csv` function. To get these names, we manually transcribed the list from the `adult.names` file. In the future, we'll store these names as a machine readable JSON file so that we don't have to construct the list manually each time.
 
 By glancing at the first 5 rows of the data, we can see that we have primarily categorical data. Our target, `data.income` is also currently constructed as a categorical field. Unfortunately, with categorical fields, we don't have a lot of visualization options (quite yet). However, it would be interesting to see the frequencies of each class, relative to the target of our classifier. To do this, we can use the `countplot` function from the Python visualization package Seaborn to count the occurrences of each data point. Let's take a look at the counts of `data.occupation` and `data.education` &mdash; two likely predictors of income in the Census data:
 
 ```python
 import seaborn as sns
 sns.countplot(y='occupation', hue='income', data=data,)
+sns.plt.show()
 ```
 
 ![png](census_files/census_6_1.png)
@@ -210,6 +213,7 @@ sns.countplot(y='occupation', hue='income', data=data,)
 
 ```python
 sns.countplot(y='education', hue='income', data=data,)
+sns.plt.show()
 ```
 
 ![png](census_files/census_7_1.png)
