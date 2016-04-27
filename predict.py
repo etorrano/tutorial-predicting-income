@@ -10,6 +10,7 @@ import pickle
 import requests
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 from sklearn.pipeline import Pipeline
 from sklearn.datasets.base import Bunch
@@ -60,17 +61,70 @@ names = [
     'income',
 ]
 
-data = pd.read_csv('data/adult.data', sep="\s*,", names=names)
-print data.head()
+data = pd.read_csv('data/adult.data', sep="\s*,", names=names, engine='python')
+print data.describe()
 
-################################################################################
-# Visualize
-################################################################################
+###############################################################################
+Visualize
+###############################################################################
 sns.countplot(y='occupation', hue='income', data=data,)
 sns.plt.show()
 
 sns.countplot(y='education', hue='income', data=data,)
 sns.plt.show()
+
+
+# How years of education correlate to income, disaggregated by race. More education does not result in the same gains in income for Asian Americans/Pacific Islanders and Native Americans compared to Caucasians.
+g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
+g = g.map(sns.boxplot, 'income', 'education-num')
+sns.plt.show()
+
+# How years of education correlate to income, disaggregated by sex. More education also does not result in the same gains in income for women compared to men.
+g = sns.FacetGrid(data, col='sex', size=4, aspect=.5)
+g = g.map(sns.boxplot, 'income', 'education-num')
+sns.plt.show()
+
+# How age correlates to income, disaggregated by race. Generally older people make more, except for Asian Americans/Pacific Islanders.
+g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
+g = g.map(sns.boxplot, 'income', 'age')
+sns.plt.show()
+
+# How hours worked per week correlates to income, disaggregated by marital status.
+g = sns.FacetGrid(data, col='marital-status', size=4, aspect=.5)
+g = g.map(sns.boxplot, 'income', 'hours-per-week')
+sns.plt.show()
+
+sns.violinplot(x='hours-per-week', hue='income', data=data,)
+sns.plt.show()
+
+sns.violinplot(x='education-num', hue='income', data=data,)
+sns.plt.show()
+
+sns.violinplot(x='sex', y='education-num', hue='income', data=data, split=True, scale='count')
+sns.plt.show()
+
+sns.violinplot(x='sex', y='hours-per-week', hue='income', data=data, split=True, scale='count')
+sns.plt.show()
+
+sns.violinplot(x='sex', y='age', hue='income', data=data, split=True, scale='count')
+sns.plt.show()
+
+
+g = sns.PairGrid(data,
+                 x_vars=['income','sex'],
+                 y_vars=['age'],
+                 aspect=.75, size=3.5)
+g.map(sns.violinplot, palette='pastel')
+sns.plt.show()
+#
+g = sns.PairGrid(data,
+                 x_vars=['marital-status','race'],
+                 y_vars=['education-num'],
+                 aspect=.75, size=3.5)
+g.map(sns.violinplot, palette='pastel')
+g.set_xticklabels(rotation=30)
+sns.plt.show()
+
 
 ################################################################################
 # Make the bunch
@@ -100,8 +154,8 @@ def load_data(root='data'):
         readme = f.read()
 
     # Load the training and test data, skipping the bad row in the test data
-    train = pd.read_csv(os.path.join(root, 'adult.data'), names=names)
-    test  = pd.read_csv(os.path.join(root, 'adult.test'), names=names, skiprows=1)
+    train = pd.read_csv(os.path.join(root, 'adult.data'), sep="\s*,", names=names, engine='python')
+    test  = pd.read_csv(os.path.join(root, 'adult.test'), sep="\s*,", names=names, engine='python', skiprows=1)
 
     # Remove the target from the categorical features
     meta['categorical_features'].pop('income')
@@ -209,21 +263,24 @@ def predict(model, meta=meta):
     data = {} # Store the input from the user
 
     for column in meta['feature_names'][:-1]:
-        # Get the valid responses
-        valid = meta['categorical_features'].get(column)
+        if column == 'fnlwgt':
+            data[column] = 189778 # This is just the mean value.
+        else:
+            # Get the valid responses
+            valid = meta['categorical_features'].get(column)
 
-        # Prompt the user for an answer until good
-        while True:
-            val = " " + raw_input("enter {} >".format(column))
-            if valid and val not in valid:
-                print "Not valid, choose one of {}".format(valid)
-            else:
-                data[column] = val
-                break
+            # Prompt the user for an answer until good
+            while True:
+                val = " " + raw_input("enter {} >".format(column))
+                if valid and val not in valid:
+                    print "Not valid, choose one of {}".format(valid)
+                else:
+                    data[column] = val
+                    break
 
     # Create prediction and label
     yhat = model.predict(pd.DataFrame([data]))
-    return yencode.inverse_transform(yhat)
+    print "We predict that you make %s" % yencode.inverse_transform(yhat)[0]
 
 ################################################################################
 #

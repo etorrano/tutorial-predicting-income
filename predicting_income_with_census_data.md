@@ -21,6 +21,7 @@ import pickle
 import requests
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 from sklearn.pipeline import Pipeline
 from sklearn.datasets.base import Bunch
@@ -229,6 +230,39 @@ sns.plt.show()
 
 The `countplot` function accepts either an `x` or a `y` argument to specify if this is a bar plot or a column plot. We chose to use the `y` argument so that the labels were readable. The `hue` argument specifies a column for comparison; in this case we're concerned with the relationship of our categorical variables to the target income. Go ahead and explore other variables in the dataset, for example `data.race` and `data.sex` to see if those values are predictive of the level of income or not!
 
+How do years of education correlate to income, disaggregated by race? More education does not result in the same gains in income for Asian Americans/Pacific Islanders and Native Americans compared to Caucasians:    
+```python
+g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
+g = g.map(sns.boxplot, 'income', 'education-num')
+sns.plt.show()
+```
+![Education and Income by Race](census_files/ed_inc_race.png)
+
+How do years of education correlate to income, disaggregated by sex? More education also does not result in the same gains in income for women compared to men:    
+```python
+g = sns.FacetGrid(data, col='sex', size=4, aspect=.5)
+g = g.map(sns.boxplot, 'income', 'education-num')
+sns.plt.show()
+```
+![Education and Income by Sex](census_files/ed_inc_sex.png)
+
+How does age correlates to income, disaggregated by race? Generally older people make more, except for Asian Americans/Pacific Islanders:    
+```python
+g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
+g = g.map(sns.boxplot, 'income', 'age')
+sns.plt.show()
+```
+![Age and Income by Race](census_files/age_inc_race.png)
+
+How do hours worked per week correlates to income, disaggregated by marital status?
+```python
+g = sns.FacetGrid(data, col='marital-status', size=4, aspect=.5)
+g = g.map(sns.boxplot, 'income', 'hours-per-week')
+sns.plt.show()
+```
+![Hours and Income by Marital Status](census_files/hours_inc_marital.png)
+
+
 ## Data Management
 
 Now that we've completed some initial investigation and have started to identify the possible features available in our dataset, we need to structure our data on disk in a way that can be loaded into Scikit-Learn in a repeatable fashion for continued analysis. We suggest using the `sklearn.datasets.base.Bunch` object to load the data into `data` and `target` attributes respectively, similar to how Scikit-Learn's toy datasets are structured. Using this object to manage our data will mirror the native Scikit-Learn API and allow us to easily copy-and-paste code that demonstrates classifiers and techniques with the built-in datasets. Importantly, this API will also allow us to communicate to other developers and our future-selves about exactly how to use the data.
@@ -238,7 +272,7 @@ In order to organize our data on disk, we'll need to add the following files:
 - `README.md`: a markdown file containing information about the dataset and attribution. Will be exposed by the `DESCR` attribute.
 - `meta.json`: a helper file that contains machine readable information about the dataset like `target_names` and `feature_names`.
 
-We constructed a pretty simple `README.md` in Markdown that gave the title of the dataset, the link to the UCI Machine Learning Repository page that contained the dataset, as well as a citation to the author. We simply wrote this file directly using my own text editor.
+Using a text editor, we constructed a pretty simple `README.md` in Markdown that gave the title of the dataset, the link to the UCI Machine Learning Repository page that contained the dataset, as well as a citation to the author.
 
 The `meta.json` file, however, we can write using the data frame that we already have. We've already done the manual work of writing the column names into a `names` variable earlier, there's no point in letting that go to waste!
 
@@ -514,7 +548,7 @@ def predict(model, meta=meta):
 
     # Create prediction and label
     yhat = model.predict(pd.DataFrame([data]))
-    return yencode.inverse_transform(yhat)
+    print "We predict that you make %s" % yencode.inverse_transform(yhat)[0]
 
 
 # Execute the interface
