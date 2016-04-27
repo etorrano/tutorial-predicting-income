@@ -217,7 +217,7 @@ sns.countplot(y='occupation', hue='income', data=data,)
 sns.plt.show()
 ```
 
-![png](census_files/census_6_1.png)
+![Income counts by occupation](figures/inc_occ.png)
 
 
 ```python
@@ -225,7 +225,7 @@ sns.countplot(y='education', hue='income', data=data,)
 sns.plt.show()
 ```
 
-![png](census_files/census_7_1.png)
+![Income counts by education](figures/inc_edu.png)
 
 
 The `countplot` function accepts either an `x` or a `y` argument to specify if this is a bar plot or a column plot. We chose to use the `y` argument so that the labels were readable. The `hue` argument specifies a column for comparison; in this case we're concerned with the relationship of our categorical variables to the target income. Go ahead and explore other variables in the dataset, for example `data.race` and `data.sex` to see if those values are predictive of the level of income or not!
@@ -236,7 +236,7 @@ g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'education-num')
 sns.plt.show()
 ```
-![Education and Income by Race](census_files/ed_inc_race.png)
+![Education and Income by Race](figures/ed_inc_race.png)
 
 How do years of education correlate to income, disaggregated by sex? More education also does not result in the same gains in income for women compared to men:    
 ```python
@@ -244,7 +244,7 @@ g = sns.FacetGrid(data, col='sex', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'education-num')
 sns.plt.show()
 ```
-![Education and Income by Sex](census_files/ed_inc_sex.png)
+![Education and Income by Sex](figures/ed_inc_sex.png)
 
 How does age correlates to income, disaggregated by race? Generally older people make more, except for Asian Americans/Pacific Islanders:    
 ```python
@@ -252,7 +252,7 @@ g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'age')
 sns.plt.show()
 ```
-![Age and Income by Race](census_files/age_inc_race.png)
+![Age and Income by Race](figures/age_inc_race.png)
 
 How do hours worked per week correlates to income, disaggregated by marital status?
 ```python
@@ -260,7 +260,7 @@ g = sns.FacetGrid(data, col='marital-status', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'hours-per-week')
 sns.plt.show()
 ```
-![Hours and Income by Marital Status](census_files/hours_inc_marital.png)
+![Hours and Income by Marital Status](figures/hours_inc_marital.png)
 
 
 ## Data Management
