@@ -271,14 +271,6 @@ sns.plt.show()
 sns.violinplot(x='sex', y='hours-per-week', hue='income', data=data, split=True, scale='count')
 sns.plt.show()
 
-sns.violinplot(x='sex', y='age', hue='income', data=data, split=True, scale='count')
-sns.plt.show()
-```
-![Education and Income by Sex](figures/ed_inc_sex_vio.png)
-![Hours Worked and Income by Sex](figures/hrs_inc_sex_vio.png)
-![Age and Income by Sex](figures/age_inc_sex_vio.png)
-
-```python
 g = sns.PairGrid(data,
                  x_vars=['income','sex'],
                  y_vars=['age'],
@@ -286,17 +278,10 @@ g = sns.PairGrid(data,
 g.map(sns.violinplot, palette='pastel')
 sns.plt.show()
 ```
+![Education and Income by Sex](figures/ed_inc_sex_vio.png)
+![Hours Worked and Income by Sex](figures/hrs_inc_sex_vio.png)
 ![Age and Income by Sex Side-by-Side](figures/age_inc_sex_vio2.png)
 
-```python
-g = sns.PairGrid(data,
-                 x_vars=['marital-status','race'],
-                 y_vars=['education-num'],
-                 aspect=.75, size=3.5)
-g.map(sns.violinplot, palette='pastel')
-sns.plt.show()
-```
-![Years of Education by Marital Status and Race Side-by-Side](figures/ed_mar_race.png)
 
 
 ## Data Management
@@ -505,6 +490,7 @@ Our custom imputer, like the `EncodeCategorical` transformer takes a set of colu
 We chose to do the label encoding first, assuming that because the `Imputer` required numeric values, we'd be able to do the parsing in advance. However, after requiring a custom imputer, we'd say that it's probably best to deal with the missing values early, when they're still a specific value, rather than take a chance.
 
 ## Model Build
+![ML Model Pipeline](figures/ml_pipeline.png)
 
 Now that we've finally achieved our feature extraction, we can continue on to the model build phase. To create our classifier, we're going to create a [`Pipeline`](http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) that uses our feature transformers and ends in an estimator that can do classification. We can then write the entire pipeline object to disk with the `pickle`, allowing us to load it up and use it to make predictions in the future.
 
