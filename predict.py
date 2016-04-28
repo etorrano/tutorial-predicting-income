@@ -65,7 +65,7 @@ data = pd.read_csv('data/adult.data', sep="\s*,", names=names, engine='python')
 print data.describe()
 
 ###############################################################################
-Visualize
+# Visualize
 ###############################################################################
 sns.countplot(y='occupation', hue='income', data=data,)
 sns.plt.show()
@@ -94,11 +94,6 @@ g = sns.FacetGrid(data, col='marital-status', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'hours-per-week')
 sns.plt.show()
 
-sns.violinplot(x='hours-per-week', hue='income', data=data,)
-sns.plt.show()
-
-sns.violinplot(x='education-num', hue='income', data=data,)
-sns.plt.show()
 
 sns.violinplot(x='sex', y='education-num', hue='income', data=data, split=True, scale='count')
 sns.plt.show()
@@ -109,20 +104,18 @@ sns.plt.show()
 sns.violinplot(x='sex', y='age', hue='income', data=data, split=True, scale='count')
 sns.plt.show()
 
-
 g = sns.PairGrid(data,
                  x_vars=['income','sex'],
                  y_vars=['age'],
                  aspect=.75, size=3.5)
 g.map(sns.violinplot, palette='pastel')
 sns.plt.show()
-#
+
 g = sns.PairGrid(data,
                  x_vars=['marital-status','race'],
                  y_vars=['education-num'],
                  aspect=.75, size=3.5)
 g.map(sns.violinplot, palette='pastel')
-g.set_xticklabels(rotation=30)
 sns.plt.show()
 
 

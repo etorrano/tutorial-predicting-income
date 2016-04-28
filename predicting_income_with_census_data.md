@@ -230,7 +230,7 @@ sns.plt.show()
 
 The `countplot` function accepts either an `x` or a `y` argument to specify if this is a bar plot or a column plot. We chose to use the `y` argument so that the labels were readable. The `hue` argument specifies a column for comparison; in this case we're concerned with the relationship of our categorical variables to the target income. Go ahead and explore other variables in the dataset, for example `data.race` and `data.sex` to see if those values are predictive of the level of income or not!
 
-How do years of education correlate to income, disaggregated by race? More education does not result in the same gains in income for Asian Americans/Pacific Islanders and Native Americans compared to Caucasians:    
+For example, it would be useful to know if years of education correlate equally well with income for people of all races. When we use a faceted boxplot graph to disaggregate by race, we can see that more years of education does not result in the same gains in income for Asian Americans/Pacific Islanders and Native Americans compared with Caucasians:    
 ```python
 g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'education-num')
@@ -238,7 +238,7 @@ sns.plt.show()
 ```
 ![Education and Income by Race](figures/ed_inc_race.png)
 
-How do years of education correlate to income, disaggregated by sex? More education also does not result in the same gains in income for women compared to men:    
+How do years of education correlate with income, disaggregated by sex? More education also does not result in the same gains in income for women compared with men:    
 ```python
 g = sns.FacetGrid(data, col='sex', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'education-num')
@@ -246,7 +246,7 @@ sns.plt.show()
 ```
 ![Education and Income by Sex](figures/ed_inc_sex.png)
 
-How does age correlates to income, disaggregated by race? Generally older people make more, except for Asian Americans/Pacific Islanders:    
+How does age correlates with income, disaggregated by race? Generally older people make more, except for Asian Americans/Pacific Islanders:    
 ```python
 g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'age')
@@ -254,13 +254,49 @@ sns.plt.show()
 ```
 ![Age and Income by Race](figures/age_inc_race.png)
 
-How do hours worked per week correlates to income, disaggregated by marital status?
+How do hours worked per week correlate with income, disaggregated by marital status?
 ```python
 g = sns.FacetGrid(data, col='marital-status', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'hours-per-week')
 sns.plt.show()
 ```
 ![Hours and Income by Marital Status](figures/hours_inc_marital.png)
+
+Violinplots integrate the information from a boxplot with kernel density estimates. For example, the two plots below enable us to see the distribution of years of education, hours worked per week, and age for men and women with annual incomes both above and below $50,000.
+
+```python
+sns.violinplot(x='sex', y='education-num', hue='income', data=data, split=True, scale='count')
+sns.plt.show()
+
+sns.violinplot(x='sex', y='hours-per-week', hue='income', data=data, split=True, scale='count')
+sns.plt.show()
+
+sns.violinplot(x='sex', y='age', hue='income', data=data, split=True, scale='count')
+sns.plt.show()
+```
+![Education and Income by Sex](figures/ed_inc_sex_vio.png)
+![Hours Worked and Income by Sex](figures/hrs_inc_sex_vio.png)
+![Age and Income by Sex](figures/age_inc_sex_vio.png)
+
+```python
+g = sns.PairGrid(data,
+                 x_vars=['income','sex'],
+                 y_vars=['age'],
+                 aspect=.75, size=3.5)
+g.map(sns.violinplot, palette='pastel')
+sns.plt.show()
+```
+![Age and Income by Sex Side-by-Side](figures/age_inc_sex_vio2.png)
+
+```python
+g = sns.PairGrid(data,
+                 x_vars=['marital-status','race'],
+                 y_vars=['education-num'],
+                 aspect=.75, size=3.5)
+g.map(sns.violinplot, palette='pastel')
+sns.plt.show()
+```
+![Years of Education by Marital Status and Race Side-by-Side](figures/ed_mar_race.png)
 
 
 ## Data Management
