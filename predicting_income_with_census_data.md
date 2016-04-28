@@ -271,17 +271,12 @@ sns.plt.show()
 sns.violinplot(x='sex', y='hours-per-week', hue='income', data=data, split=True, scale='count')
 sns.plt.show()
 
-g = sns.PairGrid(data,
-                 x_vars=['income','sex'],
-                 y_vars=['age'],
-                 aspect=.75, size=3.5)
-g.map(sns.violinplot, palette='pastel')
+sns.violinplot(x='sex', y='age', hue='income', data=data, split=True, scale='count')
 sns.plt.show()
 ```
 ![Education and Income by Sex](figures/ed_inc_sex_vio.png)
 ![Hours Worked and Income by Sex](figures/hrs_inc_sex_vio.png)
-![Age and Income by Sex Side-by-Side](figures/age_inc_sex_vio2.png)
-
+![Age and Income by Sex Side-by-Side](figures/age_inc_sex_vio.png)
 
 
 ## Data Management
