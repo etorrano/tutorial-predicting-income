@@ -275,11 +275,6 @@ def predict(model, meta=meta):
     yhat = model.predict(pd.DataFrame([data]))
     print "We predict that you make %s" % yencode.inverse_transform(yhat)[0]
 
-################################################################################
-#
-################################################################################
-
-
 
 if __name__ == '__main__':
     # Get the data from the UCI repository
