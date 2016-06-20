@@ -307,5 +307,12 @@ The hardest (and often most important) part about operationalizing the model is 
 
 ## Conclusion
 
-Thanks for joining us for this end-to-end tutorial of a machine learning application in Python. We tried to stay true to our workflow so that you can generalize from this tutorial to do your own classification or regression-based applications with your own datasets. Now that you've had a chance to look at our walkthrough, we hope you'll try a few variations on your own and be well on your way to operationalizing machine learning for data science! And if you liked this post, we hope you'll check out the [District Data Labs blog](http://blog.districtdatalabs.com/) for more walkthroughs and tutorials on a range of data science topics including [machine learning](http://blog.districtdatalabs.com/an-introduction-to-machine-learning-with-python), [sentiment analysis](http://blog.districtdatalabs.com/modern-methods-for-sentiment-analysis), [data products](http://blog.districtdatalabs.com/the-age-of-the-data-product), and  
-[data wrangling](http://blog.districtdatalabs.com/simple-csv-data-wrangling-with-python).
+Thanks for joining us for this end-to-end tutorial of a machine learning application in Python. We tried to stay true to our workflow so that you can generalize from this tutorial to do your own classification or regression-based applications with your own datasets. Now that you've had a chance to look at our walkthrough, we hope you'll try a few variations on your own and be well on your way to [operationalizing machine learning](http://pycon.districtdatalabs.com/posters/machine-learning/horizontal/ddl-machine-learning-print.png) for data science! And if you liked this post, we hope you'll check out the [District Data Labs blog](http://blog.districtdatalabs.com/) for more walkthroughs and tutorials on a range of data science topics including:     
+ - [data products](http://blog.districtdatalabs.com/the-age-of-the-data-product)    
+ - [data wrangling](http://blog.districtdatalabs.com/simple-csv-data-wrangling-with-python)    
+ - [machine learning](http://blog.districtdatalabs.com/an-introduction-to-machine-learning-with-python)    
+ - [feature analysis](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-1)    
+ - [model selection](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-2)    
+ - [model evaluation and hyperparameter tuning](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-3)     
+ - [natural language processing](https://districtdatalabs.silvrback.com/pycon-tutorial-nlp)    
+ - [sentiment analysis](http://blog.districtdatalabs.com/modern-methods-for-sentiment-analysis)    
