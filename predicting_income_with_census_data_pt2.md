@@ -247,6 +247,48 @@ y_pred = census.predict(dataset.data_test)
 print classification_report(y_true, y_pred, target_names=dataset.target_names)
 ```
 
+Classification reports are a way to visualize the performance of a classier.
+
+```python
+import numpy as np
+from matplotlib import cm
+
+def plot_classification_report(cr, title=None, cmap=cm.YlOrRd):
+    title = title or 'Classification report'
+    lines = cr.split('\n')
+    classes = []
+    matrix = []
+
+    for line in lines[2:(len(lines)-3)]:
+        s = line.split()
+        classes.append(s[0])
+        value = [float(x) for x in s[1: len(s) - 1]]
+        matrix.append(value)
+
+    fig, ax = plt.subplots(1)
+
+    for column in range(len(matrix)+1):
+        for row in range(len(classes)):
+            txt = matrix[row][column]
+            ax.text(column,row,matrix[row][column],va='center',ha='center')
+
+    fig = plt.imshow(matrix, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    x_tick_marks = np.arange(len(classes)+1)
+    y_tick_marks = np.arange(len(classes))
+    plt.xticks(x_tick_marks, ['precision', 'recall', 'f1-score'], rotation=45)
+    plt.yticks(y_tick_marks, classes)
+    plt.ylabel('Classes')
+    plt.xlabel('Measures')
+    plt.show()
+
+cr = classification_report(y_true, y_pred, target_names=dataset.target_names)
+plot_classification_report(cr)
+```
+
+![Classification Report](figures/classification_report.png)
+
 The classifier we built does an ok job, with an F1 score of 0.77, nothing to sneer at. However, it is possible that an SVM, a Naive Bayes, or a k-Nearest Neighbor model would do better. It is easy to construct new models using the pipeline approach that we prepared before, and we would encourage you to try it out! Furthermore, a grid search, additional feature analysis, or domain expertise in Census data may lead to a higher scoring model than the one we quickly put together. Luckily, now that we've sorted out all the pipeline issues, we can get to work on inspecting and improving the model!
 
 The last step is to save our model to disk for reuse later, with the `pickle` module:

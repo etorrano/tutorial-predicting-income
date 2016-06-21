@@ -12,6 +12,9 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+import numpy as np
+from matplotlib import cm
+
 from sklearn.pipeline import Pipeline
 from sklearn.datasets.base import Bunch
 from sklearn.metrics import classification_report
@@ -117,6 +120,37 @@ g = sns.PairGrid(data,
                  aspect=.75, size=3.5)
 g.map(sns.violinplot, palette='pastel')
 sns.plt.show()
+
+
+def plot_classification_report(cr, title=None, cmap=cm.YlOrRd):
+    title = title or 'Classification report'
+    lines = cr.split('\n')
+    classes = []
+    matrix = []
+
+    for line in lines[2:(len(lines)-3)]:
+        s = line.split()
+        classes.append(s[0])
+        value = [float(x) for x in s[1: len(s) - 1]]
+        matrix.append(value)
+
+    fig, ax = plt.subplots(1)
+
+    for column in range(len(matrix)+1):
+        for row in range(len(classes)):
+            txt = matrix[row][column]
+            ax.text(column,row,matrix[row][column],va='center',ha='center')
+
+    fig = plt.imshow(matrix, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    x_tick_marks = np.arange(len(classes)+1)
+    y_tick_marks = np.arange(len(classes))
+    plt.xticks(x_tick_marks, ['precision', 'recall', 'f1-score'], rotation=45)
+    plt.yticks(y_tick_marks, classes)
+    plt.ylabel('Classes')
+    plt.xlabel('Measures')
+    plt.show()
 
 
 ################################################################################
@@ -303,7 +337,9 @@ if __name__ == '__main__':
     y_pred = census.predict(dataset.data_test)
 
     # execute classification report
-    print classification_report(y_true, y_pred, target_names=dataset.target_names)
+    # print classification_report(y_true, y_pred, target_names=dataset.target_names)
+    cr = classification_report(y_true, y_pred, target_names=dataset.target_names)
+    plot_classification_report(cr)
 
     # Pickle the model for future use
     dump_model(census)
