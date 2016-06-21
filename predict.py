@@ -339,6 +339,7 @@ if __name__ == '__main__':
     # execute classification report
     # print classification_report(y_true, y_pred, target_names=dataset.target_names)
     cr = classification_report(y_true, y_pred, target_names=dataset.target_names)
+    print cr
     plot_classification_report(cr)
 
     # Pickle the model for future use

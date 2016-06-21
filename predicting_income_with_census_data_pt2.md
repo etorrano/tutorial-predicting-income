@@ -4,7 +4,7 @@ _by Benjamin Bengfort and Rebecca Bilbro, adapted from a [post](http://blog.dist
 
 Welcome back! If you haven't read Part 1 yet, you can do so [here](https://github.com/CommerceDataService/tutorial-predicting-income/blob/master/predicting_income_with_census_data_pt1.md).
 
-In Part 1 of this 2-part post, we discussed getting started with machine learning and conducting feature analysis and exploration using a combination of statistical and visual techniques. Now that we've completed some initial investigation and have started to identify the possible features available in our dataset, in Part 2, we'll discuss how to transform data and put it into a machine learning pipeline that can support a predictive command-line application.
+In Part 1 of this 2-part post, we discussed getting started with machine learning and conducting feature analysis and exploration using a combination of statistical and visual techniques. Recall that our objective is to use U.S. Census Bureau demographic and income data to power a command-line application that predicts whether or not the user makes more or less than $50K based on their demographic profile. Now that we've completed some initial investigation and have started to identify the information encoded in our dataset, in Part 2 we'll discuss how to transform that data and put it into a machine learning pipeline that can support our application.
 
 ## Data Management
 
@@ -17,7 +17,7 @@ In order to organize our data on disk, we'll need to add the following files:
 
 Using a text editor, we constructed a pretty simple `README.md` in Markdown that gave the title of the dataset, the link to the UCI Machine Learning Repository page that contained the dataset, as well as a citation to the author.
 
-The `meta.json` file, however, we can write using the data frame that we already have. We've already done the manual work of writing the column names into a `names` variable earlier, there's no point in letting that go to waste!
+The `meta.json` file, however, we can write using the dataframe that we created in Part 1. We've already done the manual work of writing the column names into a `names` variable earlier, there's no point in letting that go to waste!
 
 
 ```python
@@ -35,9 +35,9 @@ with open('data/meta.json', 'w') as f:
     json.dump(meta, f, indent=2)
 ```
 
-This code creates a `meta.json` file by inspecting the data frame that we have constructed. The `target_names` column is just the two unique values in the `data.income` series; by using the `pd.Series.unique` method - we're guaranteed to spot data errors if there are more or less than the expected two values. The `feature_names` are simply the names of all the columns.
+This code creates a `meta.json` file by inspecting the dataframe that we have constructed. The `target_names` column is just the two unique values in the `data.income` series; by using the `pd.Series.unique` method, we're guaranteed to spot data errors if there are more or less than the expected two values. The `feature_names` are simply the names of all the columns.
 
-Then we get tricky &mdash; we want to store the possible values of each categorical field for lookup later, but how do we know which columns are categorical and which are not? Luckily, Pandas has already done an analysis for us, and has stored the column data type, `data[column].dtype`, as either `int64` or `object`. Here we are using a dictionary comprehension to create a dictionary whose keys are the categorical columns, determined by checking the object type and comparing with `object`, and whose values are a list of unique values for that field.
+Then we got tricky &mdash; we want to store the possible values of each categorical field for lookup later, but how do we know which columns are categorical and which are not? Luckily, Pandas has already done an analysis for us, and has stored the column data type, `data[column].dtype`, as either `int64` or `object`. Here we are using a dictionary comprehension to create a dictionary whose keys are the categorical columns, determined by checking the object type and comparing with `object`, and whose values are a list of unique values for that field.
 
 Now that we have everything we need stored on disk, we can create a `load_data` function, which will allow us to load the training and test datasets appropriately from disk and store them in a `Bunch`:
 
@@ -89,7 +89,7 @@ First we'll explore how to apply these transformations to our dataset, then we'l
 
 ### Label Encoding
 
-Our first step is to get our data out of the object datatype and into a numeric type, since nearly all operations we'd like to apply to our data are going to rely on numeric types. Luckily, Scikit-Learn does provide a transformer for converting categorical labels into numeric integers: [`sklearn.preprocessing.LabelEncoder`](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html). Unfortunately, it can only transform a single vector at a time, so we'll have to adapt it in order to apply it to multiple columns.
+Our first step is to get our data out of the object datatype and into a numeric type, since nearly all operations we'd like to apply to our data are going to rely on numeric types. Luckily, Scikit-Learn does provide a transformer for converting categorical labels into numeric integers: [`sklearn.preprocessing.LabelEncoder`](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html). Unfortunately, it can only transform a single vector at a time, so we'll have to adapt it to apply it to multiple columns.
 
 Like all Scikit-Learn transformers, the `LabelEncoder` has `fit` and `transform` methods (as well as a special all-in-one, `fit_transform` method) that can be used for stateful transformation of a dataset. In the case of the `LabelEncoder`, the `fit` method discovers all unique elements in the given vector, orders them lexicographically, and assigns them an integer value. These values are actually the indices of the elements inside the `LabelEncoder.classes_` attribute, which can also be used to do a reverse lookup of the class name from the integer value.
 
@@ -153,13 +153,13 @@ encoder = EncodeCategorical(dataset.categorical_features.keys())
 data = encoder.fit_transform(dataset.data)
 ```
 
-This specialized transformer now has the ability to encode multiple column labels in a data frame, saving information about the state of the encoders. It would be trivial to add an `inverse_transform` method as well that accepts numeric data and converts it to labels, using the `inverse_transform` method of each individual `LabelEncoder` on a per-column basis.
+This specialized transformer now has the ability to encode multiple column labels in a data frame, saving information about the state of the encoders. It would be trivial to add an `inverse_transform` method as well that accepts numeric data and converts it back to labels, using the `inverse_transform` method of each individual `LabelEncoder` on a per-column basis.
 
 ### Imputation
 
 According to the `adult.names` file, unknown values are given via the `"?"` string. We'll have to either ignore rows that contain a `"?"` or impute their value to the row. Scikit-Learn provides a transformer for dealing with missing values at either the column level or at the row level in the `sklearn.preprocessing` library called the [Imputer](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.Imputer.html).
 
-The `Imputer` requires information about what missing values are, either an integer or the string, `Nan` for `np.nan` data types, it then requires a strategy for dealing with it. For example, the `Imputer` can fill in the missing values with the mean, median, or most frequent values for each column. If provided an axis argument of 0, columns that contain only missing data are discarded; if provided an axis argument of 1, rows which contain only missing values raise an exception. Basic usage of the `Imputer` is as follows:
+The `Imputer` requires information about what the missing values are, either an integer or the string, `Nan` for `np.nan` data types, it then requires a strategy for dealing with it. For example, the `Imputer` can fill in the missing values with the mean, median, or most frequent values for each column. If provided an axis argument of 0, columns that contain only missing data are discarded; if provided an axis argument of 1, rows which contain only missing values raise an exception. Basic usage of the `Imputer` is as follows:
 
 ```python
 imputer = Imputer(missing_values='Nan', strategy='most_frequent')
@@ -207,7 +207,7 @@ imputer = ImputeCategorical(['workclass', 'native-country', 'occupation'])
 data = imputer.fit_transform(data)
 ```
 
-Our custom imputer, like the `EncodeCategorical` transformer takes a set of columns to perform imputation on. In this case we only wrap a single `Imputer` as the `Imputer` is already multicolumn &mdash; all that's required is to ensure that the correct columns are transformed. We inspected the encoders and found only three columns that had missing values in them, and passed them directly into the customer imputer.
+Our custom imputer, like the `EncodeCategorical` transformer takes a set of columns to perform imputation on. In this case we only wrap a single `Imputer` as the `Imputer` is already multicolumn &mdash; all that's required is to ensure that the correct columns are transformed. We inspected the encoders and found only three columns that had missing values in them, and passed them directly into the custom imputer.
 
 We chose to do the label encoding first, assuming that because the `Imputer` required numeric values, we'd be able to do the parsing in advance. However, after requiring a custom imputer, we'd say that it's probably best to deal with the missing values early, when they're still a specific value, rather than take a chance.
 
@@ -219,17 +219,17 @@ Now that we've finally achieved our feature extraction, we can continue on to th
 A pipeline is a step-by-step set of transformers that takes input data and transforms it, until finally passing it to an estimator at the end. Pipelines can be constructed using a named declarative syntax so that they're easy to modify and develop. Our pipeline is as follows:
 
 ```python
-# we need to encode our target data as well.
+# Ee need to encode our target data as well
 yencode = LabelEncoder().fit(dataset.target)
 
-# construct the pipeline
+# Construct the pipeline
 census = Pipeline([
         ('encoder',  EncodeCategorical(dataset.categorical_features.keys())),
         ('imputer', ImputeCategorical(['workclass', 'native-country', 'occupation'])),
         ('classifier', LogisticRegression())
     ])
 
-# fit the pipeline
+# Fit the pipeline
 census.fit(dataset.data, yencode.transform(dataset.target))
 ```
 
@@ -242,12 +242,9 @@ y_true = yencode.transform([y for y in dataset.target_test])
 
 # use the model to get the predicted value
 y_pred = census.predict(dataset.data_test)
-
-# execute classification report
-print classification_report(y_true, y_pred, target_names=dataset.target_names)
 ```
 
-Classification reports are a way to visualize the performance of a classier.
+How accurate is our classifier? We can use the built-in Scikit-Learn function `classification_report` to evaluate the predictive power of our model. A classification report provides three different evaluation metrics: precision, recall, and F1 score. Below we've provide a custom visualization tool that takes as input the Scikit-Learn classification report and produces a color-coded heatmap that will help guide our eye towards our predictive successes (the darkest reds) and weaknesses (the yellows):
 
 ```python
 import numpy as np
@@ -284,14 +281,15 @@ def plot_classification_report(cr, title=None, cmap=cm.YlOrRd):
     plt.show()
 
 cr = classification_report(y_true, y_pred, target_names=dataset.target_names)
+print cr
 plot_classification_report(cr)
 ```
 
 ![Classification Report](figures/classification_report.png)
 
-The classifier we built does an ok job, with an F1 score of 0.77, nothing to sneer at. However, it is possible that an SVM, a Naive Bayes, or a k-Nearest Neighbor model would do better. It is easy to construct new models using the pipeline approach that we prepared before, and we would encourage you to try it out! Furthermore, a grid search, additional feature analysis, or domain expertise in Census data may lead to a higher scoring model than the one we quickly put together. Luckily, now that we've sorted out all the pipeline issues, we can get to work on inspecting and improving the model!
+As we can see, the classifier we built does a fair job. With an overall F1 score of 0.77, it's nothing to sneer at. However, we can see from our heatmap that our model is much better at identifying and predicting people with annual incomes of less than $50K than it does predicting those with incomes above that threshold. It is possible that an SVM, a Naive Bayes, or a k-Nearest Neighbor model would do better. It is easy to construct new models using the pipeline approach that we prepared before, and we would encourage you to try it out! Furthermore, a grid search, additional feature analysis, or domain expertise in Census data may lead to a higher scoring model than the one we quickly put together. Luckily, now that we've sorted out all the pipeline issues, we can get to work on inspecting and improving the model! You can check out [this post](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-3)  to learn more about model evaluation and optimization through hyperparameter tuning.
 
-The last step is to save our model to disk for reuse later, with the `pickle` module:
+For now, the last step is to save our model to disk for reuse later, with the `pickle` module:
 
 ```python
 def dump_model(model, path='data', name='classifier.pickle'):
@@ -305,14 +303,13 @@ Note: It would be a good idea to also dump meta information about the date and t
 
 ## Model Operation
 
-Now it's time to explore how to use the model. To do this, we'll create a simple function that gathers input from the user on the command line, and returns a prediction with the classifier model. Moreover, this function will load the pickled model into memory to ensure the latest and greatest saved model is what's being used.
+Now it's time to explore how to operationalize the model. To do this, we'll create a simple function that gathers input from the user on the command line, and returns a prediction with the classifier model. Moreover, this function will load the pickled model into memory to ensure the latest and greatest saved model is what's being used.
 
 
 ```python
 def load_model(path='data/classifier.pickle'):
     with open(path, 'rb') as f:
         return pickle.load(f)
-
 
 def predict(model, meta=meta):
     data = {} # Store the input from the user
@@ -349,12 +346,13 @@ The hardest (and often most important) part about operationalizing the model is 
 
 ## Conclusion
 
-Thanks for joining us for this end-to-end tutorial of a machine learning application in Python. We tried to stay true to our workflow so that you can generalize from this tutorial to do your own classification or regression-based applications with your own datasets. Now that you've had a chance to look at our walkthrough, we hope you'll try a few variations on your own and be well on your way to [operationalizing machine learning](http://pycon.districtdatalabs.com/posters/machine-learning/horizontal/ddl-machine-learning-print.png) for data science! And if you liked this post, we hope you'll check out the [District Data Labs blog](http://blog.districtdatalabs.com/) for more walkthroughs and tutorials on a range of data science topics including:     
+Thanks for joining us for this end-to-end tutorial of a machine learning application in Python. We tried to stay true to our workflow so that you can generalize from this tutorial to do your own classification or regression-based applications with your own datasets. Now that you've had a chance to look at our walkthrough, we hope you'll try a few variations on your own and be well on your way to [operationalizing machine learning](http://pycon.districtdatalabs.com/posters/machine-learning/horizontal/ddl-machine-learning-print.png) for data science!
+
+If you liked this post, we hope you'll check out the [District Data Labs blog](http://blog.districtdatalabs.com/) for more walkthroughs and tutorials on a range of data science topics including:     
  - [data products](http://blog.districtdatalabs.com/the-age-of-the-data-product)    
  - [data wrangling](http://blog.districtdatalabs.com/simple-csv-data-wrangling-with-python)    
- - [machine learning](http://blog.districtdatalabs.com/an-introduction-to-machine-learning-with-python)    
- - [feature analysis](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-1)    
- - [model selection](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-2)    
- - [model evaluation and hyperparameter tuning](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-3)     
+ - [machine learning basics](http://blog.districtdatalabs.com/an-introduction-to-machine-learning-with-python)       
  - [natural language processing](https://districtdatalabs.silvrback.com/pycon-tutorial-nlp)    
  - [sentiment analysis](http://blog.districtdatalabs.com/modern-methods-for-sentiment-analysis)    
+
+... and much more!
