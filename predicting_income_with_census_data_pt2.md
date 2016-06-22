@@ -6,6 +6,10 @@ Welcome back! If you haven't read Part 1 yet, you can do so [here](https://githu
 
 In Part 1 of this 2-part post, we discussed getting started with machine learning and conducting feature analysis and exploration using a combination of statistical and visual techniques. Recall that our objective is to use U.S. Census Bureau demographic and income data to power a command-line application that predicts whether or not the user makes more or less than $50K based on their demographic profile. Now that we've completed some initial investigation and have started to identify the information encoded in our dataset, in Part 2 we'll discuss how to transform that data and put it into a machine learning pipeline that can support our application.
 
+Building a pipeline for machine learning enables us to manage our data flow so that the predictive model we construct can  be used in data product as an engine to create useful new data. Below is a good framework to keep in mind for how our data will flow into and out of the pipeline:
+
+![ML Model Pipeline](figures/ml_pipeline.png)
+
 ## Data Management
 
 Our next step is to structure our data on disk in a way that can be loaded into Scikit-Learn in a repeatable fashion for continued analysis. We suggest using the `sklearn.datasets.base.Bunch` object to load the data into `data` and `target` attributes respectively, similar to how Scikit-Learn's toy datasets are structured. Using this object to manage our data will mirror the native Scikit-Learn API and allow us to easily adapt template code from Scikit-Learn. Importantly, this API will also allow us to communicate to other developers and our future-selves about exactly how to use the data.
@@ -212,7 +216,6 @@ Our custom imputer, like the `EncodeCategorical` transformer takes a set of colu
 We chose to do the label encoding first, assuming that because the `Imputer` required numeric values, we'd be able to do the parsing in advance. However, after requiring a custom imputer, we'd say that it's probably best to deal with the missing values early, when they're still a specific value, rather than take a chance.
 
 ## Model Build
-![ML Model Pipeline](figures/ml_pipeline.png)
 
 Now that we've finally achieved our feature extraction, we can continue on to the model build phase. To create our classifier, we're going to create a [`Pipeline`](http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) that uses our feature transformers and ends in an estimator that can do classification. We can then write the entire pipeline object to disk with the `pickle`, allowing us to load it up and use it to make predictions in the future.
 
@@ -244,7 +247,7 @@ y_true = yencode.transform([y for y in dataset.target_test])
 y_pred = census.predict(dataset.data_test)
 ```
 
-How accurate is our classifier? We can use the built-in Scikit-Learn function `classification_report` to evaluate the predictive power of our model. A classification report provides three different evaluation metrics: precision, recall, and F1 score. Below we've provide a custom visualization tool that takes as input the Scikit-Learn classification report and produces a color-coded heatmap that will help guide our eye towards our predictive successes (the darkest reds) and weaknesses (the yellows):
+How accurate is our classifier? We can use the built-in Scikit-Learn function `classification_report` to evaluate the predictive power of our model. A classification report provides three different evaluation metrics: precision, recall, and F1 score. Below we've provided a custom visualization tool that takes as input the Scikit-Learn classification report and produces a color-coded heatmap that will help guide our eye towards our predictive successes (the darkest reds) and weaknesses (the lightest yellows):
 
 ```python
 import numpy as np
