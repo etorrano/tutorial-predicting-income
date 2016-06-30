@@ -4,9 +4,9 @@ _by Benjamin Bengfort and Rebecca Bilbro, adapted from a [post](http://blog.dist
 
 Welcome back! If you haven't read Part 1 yet, you can do so [here](https://github.com/CommerceDataService/tutorial-predicting-income/blob/master/predicting_income_with_census_data_pt1.md).
 
-In Part 1 of this 2-part post, we discussed getting started with machine learning and conducting feature analysis and exploration using a combination of statistical and visual techniques. Recall that our objective is to use U.S. Census Bureau demographic and income data to power a command-line application that predicts whether or not the user makes more or less than $50K based on their demographic profile. Now that we've completed some initial investigation and have started to identify the information encoded in our dataset, in Part 2 we'll discuss how to transform that data and put it into a machine learning pipeline that can support our application.
+In Part 1 of this 2-part post, we discussed getting started with machine learning and conducting feature analysis and exploration using a combination of statistical and visual techniques. Recall that our objective is to use U.S. Census Bureau demographic and income data to power a command-line application that can guess whether or not the user makes more or less than $50K based on their demographic profile. Now that we've completed some initial investigation and have started to identify the information encoded in our dataset, in Part 2 we'll discuss how to transform that data and put it into a machine learning pipeline that can support our application.
 
-Building a pipeline for machine learning enables us to manage our data flow so that the predictive model we construct can  be used in data product as an engine to create useful new data. Below is a good framework to keep in mind for how our data will flow into and out of the pipeline:
+Building a pipeline for machine learning enables us to manage our data flow so that the predictive model we construct can be used in a data product as an engine to create useful new data. Below is a good framework to keep in mind for how our data will flow into and out of the pipeline:
 
 ![ML Model Pipeline](figures/ml_pipeline.png)
 
@@ -247,7 +247,7 @@ y_true = yencode.transform([y for y in dataset.target_test])
 y_pred = census.predict(dataset.data_test)
 ```
 
-How accurate is our classifier? We can use the built-in Scikit-Learn function `classification_report` to evaluate the predictive power of our model. A classification report provides three different evaluation metrics: precision, recall, and F1 score. Below we've provided a custom visualization tool that takes as input the Scikit-Learn classification report and produces a color-coded heatmap that will help guide our eye towards our predictive successes (the darkest reds) and weaknesses (the lightest yellows):
+How accurate is our classifier? We can use the built-in Scikit-Learn function `classification_report` to evaluate the predictive power of a model. A classification report provides three different evaluation metrics: precision, recall, and F1 score. Below we've provided a custom visualization tool that takes as input the Scikit-Learn classification report and produces a color-coded heatmap that will help guide our eye towards our model's successes (the darkest reds) and weaknesses (the lightest yellows):
 
 ```python
 import numpy as np
@@ -290,7 +290,7 @@ plot_classification_report(cr)
 
 ![Classification Report](figures/classification_report.png)
 
-As we can see, the classifier we built does a fair job. With an overall F1 score of 0.77, it's nothing to sneer at. However, we can see from our heatmap that our model is much better at identifying and predicting people with annual incomes of less than $50K than it does predicting those with incomes above that threshold. It is possible that an SVM, a Naive Bayes, or a k-Nearest Neighbor model would do better. It is easy to construct new models using the pipeline approach that we prepared before, and we would encourage you to try it out! Furthermore, a grid search, additional feature analysis, or domain expertise in Census data may lead to a higher scoring model than the one we quickly put together. Luckily, now that we've sorted out all the pipeline issues, we can get to work on inspecting and improving the model! You can check out [this post](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-3)  to learn more about model evaluation and optimization through hyperparameter tuning.
+As we can see, the classifier we built does a fair job. With an overall F1 score of 0.77, it's nothing to sneer at. However, we can see from our heatmap that our model is much better at identifying people with annual incomes of less than $50K than it does those with incomes above that threshold. It is possible that an SVM, a Naive Bayes, or a k-Nearest Neighbor model would do better. It is easy to construct new models using the pipeline approach that we prepared before, and we would encourage you to try it out! Furthermore, a grid search, additional feature analysis, or domain expertise in Census data may lead to a higher scoring model than the one we quickly put together. Luckily, now that we've sorted out all the pipeline issues, we can get to work on inspecting and improving the model! You can check out [this post](https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-3)  to learn more about model evaluation and optimization through hyperparameter tuning.
 
 For now, the last step is to save our model to disk for reuse later, with the `pickle` module:
 
@@ -306,7 +306,7 @@ Note: It would be a good idea to also dump meta information about the date and t
 
 ## Model Operation
 
-Now it's time to explore how to operationalize the model. To do this, we'll create a simple function that gathers input from the user on the command line, and returns a prediction with the classifier model. Moreover, this function will load the pickled model into memory to ensure the latest and greatest saved model is what's being used.
+Now it's time to explore how to operationalize the model. To do this, we'll create a simple function that gathers input from the user on the command line, and returns a guess about their income level using the classifier model. Moreover, this function will load the pickled model into memory to ensure the latest and greatest saved model is what's being used.
 
 
 ```python
@@ -345,13 +345,15 @@ model = load_model()
 predict(model)
 ```
 
-The hardest (and often most important) part about operationalizing the model is collecting user input. We want the user to be able to tell us when we guessed right and when we guessed wrong, and we want to log that new data so that when we re-run the model, we train on the additional data. Obviously in a bigger application user input could be handled with forms, automatic data gathering, and other advanced techniques. For now, hopefully this is enough to highlight how you might use the model in practice to make predictions on unknown data.
+The hardest (and often most important) part about operationalizing the model is collecting user input. We want the user to be able to tell us when we guessed right and when we guessed wrong, and we want to log that new data so that when we re-run the model, we train on the additional data. Obviously in a bigger application user input could be handled with forms, automatic data gathering, and other advanced techniques. For now, hopefully this is enough to highlight how you might use a model in practice to make predictions or estimations for unknown data.
 
 ## Conclusion
 
-Thanks for joining us for this end-to-end tutorial of a machine learning application in Python. We tried to stay true to our workflow so that you can generalize from this tutorial to do your own classification or regression-based applications with your own datasets. Now that you've had a chance to look at our walkthrough, we hope you'll try a few variations on your own and be well on your way to [operationalizing machine learning](http://pycon.districtdatalabs.com/posters/machine-learning/horizontal/ddl-machine-learning-print.png) for data science!
+Thanks for joining us for this end-to-end tutorial of a machine learning application in Python. We tried to stay true to our workflow so that you can generalize from this tutorial to do your own classification or regression-based applications with your own datasets.
 
-If you liked this post, we hope you'll check out the [District Data Labs blog](http://blog.districtdatalabs.com/) for more walkthroughs and tutorials on a range of data science topics including:     
+As for the dataset we used for this tutorial, it's of course important to point out that income distribution in the United States is a complex issue. Income inequality is real, and in many historical datasets, factors like race, gender, and background tend to be correlated with income level. But we note that correlation is not the same as causation. Moreover, the [Census dataset used for this tutorial](https://archive.ics.uci.edu/ml/datasets/Adult) is now twenty years old. To learn more about current datasets that concern the important issue of income inequality, we recommend checking out the [MIDAAS Project](https://midaas.commerce.gov/): a new Department of Commerce website that provides a public API and developer toolkit for income data from the Census Bureau. For readers who are interested in using this tutorial as a jumping off point to build a robust application that addresses income inequality, MIDAAS is a great resource that can help you integrate the latest government data into your projects.
+
+Now that you've had a chance to look at our walkthrough, we hope you'll try a few variations on your own and be well on your way to [operationalizing machine learning](http://pycon.districtdatalabs.com/posters/machine-learning/horizontal/ddl-machine-learning-print.png) for data science!  If you liked this post, we hope you'll check out the [District Data Labs blog](http://blog.districtdatalabs.com/) for more walkthroughs and tutorials on a range of data science topics including:     
  - [data products](http://blog.districtdatalabs.com/the-age-of-the-data-product)    
  - [data wrangling](http://blog.districtdatalabs.com/simple-csv-data-wrangling-with-python)    
  - [machine learning basics](http://blog.districtdatalabs.com/an-introduction-to-machine-learning-with-python)       
