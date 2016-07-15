@@ -1,0 +1,580 @@
+<!DOCTYPE xhtml>
+<html lang="en">
+<head>
+    <title>the roof!, the roof is on fire!</title>
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72688808-7', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+    <!-- Javascript -->
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script><!-- MathJAX -->
+    <script src="js/parallax.js"></script><!-- Parallax Banner -->
+    <script src="js/navbar.hide.js"></script><!-- Hide Navbar -->
+    <script src="js/scroll.js"></script><!-- Affix Sidebar/Scroll Functions -->
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Coda:400,800' rel='stylesheet' type='text/css'><!-- Google Font for Title -->
+    <link rel="stylesheet" type="text/css" href="css/cdup_tutorial.css"><!-- Custom Theme for know.data tutorial -->
+
+    <!-- Syntax Highlighting -->
+    <!-- Support for the following languages: -->
+    <!-- Apache, Bash, C#, C++, CSS, CoffeeScript, Device Tree, Diff, HTML, XML, HTTP, Ini, JSON, Java, JavaScript, Makefile, Markdown, Nginx, Objective-C, PHP, Perl, Python, Ruby, SQL, Fortran, Julia, Lisp, Lua, Mathematica, Matlab, Python-Profile, R, Scilab, Scala, Stata, Swift -->
+    <link rel="stylesheet" type="text/css" href="css/styles/github.css"><!-- Style for highlighting Code: Default to Github -->
+    <script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script><!-- Activate Code Highlighting -->
+
+</head>
+<body>
+    <nav id='navbar' class="nav navbar-default navbar-fixed-top navbar-border"><!-- Navbar -->
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-links" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand navbar-color" href="https://commerce.gov/datausability"><strong>Data Usability</strong></a>
+            </div> <!-- navbar-header -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="collapse-links">
+                <ul class="nav navbar-nav navbar-color">
+                    <li class="disclaimer"><a href="https://commerce.gov/datausability">a project by Commerce Data Service</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right navbar-color">
+                    <li><a href="https://www.commerce.gov/datausability/">Index</a></li>
+                    <li><a href="http://www.zillow.com/research/about-us/">Zillow Research</a></li>
+                </ul>
+            </div><!-- navbar-collapse -->
+        </div><!-- container-fluid -->
+    </nav>
+
+    <!-- Banner -->
+    <section class="scroll">
+        <div class="scroll-overlay ">
+            <div class="title headtext">
+                <h1><span class="title-line" style="font-size:150%;">THIS HOUSE(ING MARKET) IS ON FIRE!</span></h1>
+                <h4><span class="title-line">USING AMERICAN COMMUNITY SURVEY AND ZILLOW DATA TO EXPLORE HOUSING AFFORDABILITY FOR PROTECTIVE SERVICE WORKERS</span></h4>
+                <h5><span class="title-line">by AARON TERRAZAS, SENIOR ECONOMIST, ZILLOW RESEARCH</span></h5>
+                <h5><span class="title-line">edited by STAR YING, COMMERCE DATA SERVICE</span></h5>
+                <h5><span class="title-line">MARCH 2016</span></h5>
+            </div>
+        </div>
+    </section>
+
+    <!-- Body -->
+    
+    <section>
+        <div class="container-fluid content">
+            <div class="row">
+                
+                    
+                <div id='' class="hidden-xs hidden-sm col-lg-4 col-md-4">
+                    <a href="https://commerce.gov/dataservice"><img class="footlogo" width="160px"src="img/CDS-horizontal-v2.jpg"/></a>
+                    <a href="http://www.uspto.gov/"><img class="footlogo" width="160px"src="img/logo.png"/></a> 
+                </div>
+
+                <div id='content' class="col-lg-6 col-md-6">
+                    <em>As part of the <a href="https://www.commerce.gov/datausability/">Commerce Data Usability Project</a>, Zillow in collaboration with the <a href="https://www.commerce.gov/dataservice/">Commerce Data Service</a> has created a tutorial that merges American Community Service data with Zillow public data to provide a better look at housing affordability for protective service workers. If you have question, feel free to reach out to the Commerce Data Service at <a href="mailto:DataUsability@doc.gov">DataUsability@doc.gov</a>.</em>
+                </div>
+            </div>
+            <hr>
+            
+            <br>
+            
+            <div class="row">
+                <div id='content' class="col-lg-10 col-md-10"><!-- Content -->
+
+                <section id='intro'>
+                    <h2 class="sectionhead">A more holistic view of housing affordability</h2>
+                    <p>When it comes to buying a house, there is a lot more to consider than just the sticker price. Wages and salaries vary widely across the country, including within specific occupations, as does the share of household income local residents are accustomed to dedicating to housing costs each month. At one extreme, some places with low housing costs might appear to be very affordable, but incomes might also be much lower than elsewhere; at the other extreme, some places that appear to be extremely expensive when looking at prices, might be more manageable as a result of relatively high wages and salaries.</p>  
+                </section>
+
+                <section id="data">
+                    <h2 class="sectionhead">What data is used?</h2>
+                    <p>By combining <a href="http://www.zillow.com/research/data/">Zillow data</a> on home values, rents, and historical housing-cost burdens with data on incomes by occuption from the United States Census Bureau's <a href="https://www.census.gov/programs-surveys/acs/">American Community Survey</a>, we can compare housing affordability for specific types of workers in different communities across the country. In this example, we estimate the share of a household's income that goes to  a monthly mortgage payment on the median home across the country's metro areas for two types of workers:    
+                    <ul>
+                        <li>Fire fighting and prevention, and other protective service workers, including supervisors (who we broadly label <strong>firefighters</strong>),</li>
+                        <li>Law enforcement workers, including supervisors (who we broadly label <strong>police officers</strong>).</li>
+                    </ul>
+                    </p>
+                </section>
+               
+                <section id='code'>
+                    <h2 class="sectionhead">Getting Started</h2>
+                    <p>This tutorial will guide you through the steps to load and wrangle Zillow and ACS data to compute the share of monthly income required to buy a typical home for firefighters and police officers across the country using the R programming language. To get started quickly, the code for this tutorial can be found at the following <a href="https://github.com/CommerceDataService/tutorial_zillow_acs">Github Repository</a>. In addition, the <a href="Firefighter Affordability - Zillow.Rmd">R Markdown</a> is provided to knit a version yourself.</p>
+
+                    <h2 class="subsection">Part 1: Preliminaries</h2>
+                    <p>Start by clearing your environment and setting your options, and calling the following libraries:
+                    <ul>
+                        <li><strong>plyr</strong>: Splitting, applying and combining data,</li>
+                        <li><strong>dplyr</strong>: Data manipulation</li>
+                        <li><strong>readr</strong>: Fast loading of tabular data into R</li>
+                        <li><strong>readxl</strong>: Fast loading of Microsoft Excel files into R</li>
+                        <li><strong>reshape2</strong>: Transform data between long and wide formats</li>
+                        <li><strong>stringi</strong>: Transform strings</li>
+                        <li><strong>ggplot2</strong>: Visualization</li>
+                        <li><strong>choroplethr</strong> and <strong>choroplethrMaps</strong>: Mapping in R</li>
+                        <li><strong>datasets</strong>: Data set with the names and abbreviations of the 50 states of the United States of America (required only for state-level summary files, see pages 9-10 in the <a href="http://www2.census.gov/programs-surveys/acs/summary_file/2014/documentation/tech_docs/2014_SummaryFile_Tech_Doc.pdf">ACS Summary File Technical Documentation</a>)</li>
+                    </ul></p>
+
+                    <p>We call the libraries using a function, <em>pkgTest</em>, which checks whether a particular package is loaded in your environment, and if not, installs it.</p>
+
+                    <pre><code>## Preliminaries
+rm(list = ls())
+
+## This function will check if a package is installed, and if not, install it
+pkgTest &lt;- function(x) {
+    if (!require(x, character.only = TRUE)) {
+        install.packages(x, dep = TRUE)
+        if (!require(x, character.only = TRUE)) 
+            stop(&quot;Package not found&quot;)
+    }
+}
+
+## These lines load the required packages
+packages &lt;- c(&quot;plyr&quot;, &quot;dplyr&quot;, &quot;readr&quot;, &quot;readxl&quot;, &quot;reshape2&quot;, &quot;stringi&quot;, &quot;datasets&quot;, 
+    &quot;ggplot2&quot;, &quot;choroplethr&quot;, &quot;choroplethrMaps&quot;)
+invisible(lapply(packages, pkgTest))
+
+## These lines set several options
+options(scipen = 999)  # Do not print scientific notation
+options(stringsAsFactors = FALSE)  ## Do not load strings as factors</code></pre>
+
+                    <h2 class="subsection">Part 2: Loading incomes and Census geographies from the American Community Survey</h2>
+                    <p>The first step is to load tables from the <a href="http://www2.census.gov/programs-surveys/acs/summary_file/">ACS Summary File FTP</a>. There are several decisions to make:
+                    <ul>
+                        <li><strong>Which year of data do you want?</strong> ACS data are available starting in 2005 (at the time of this writing, 2014 is the most recent year).</li>
+                        <li><strong>Which Summary File folder do you want?</strong> For the 2014 ACS there are three options for the 1-year ACS data and three options for the 5-year ACS data: an <em>All-in-one</em> file, a <em>State tables</em> file, and <em>topic tables</em>. Read section 2.2 of the <a href="http://www.census.gov/programs-surveys/acs/technical-documentation/summary-file-documentation.2014.html">technical documentation</a>, titled <em>Summary File Organization</em>, to select the file folder best for your needs. After reading the <a href="http://www.census.gov/programs-surveys/acs/technical-documentation/summary-file-documentation.html">ACS 2014 Technical Documentation</a>, we select the <em>1-year topic tables</em>.</li>
+                        <li><strong>Which sequence, table and line number(s) do you want?</strong> Using the <a href="https://www.census.gov/programs-surveys/acs/technical-documentation/summary-file-documentation.html">Summary File Lookup files</a>, identify the sequence, table and line numbers associated with the variable you are interested in (available under the section <em>Sequence Number/Table Number Lookup File</em>). For this analysis, we are interested in table B24011, which contains median annual earnings by industry, occupation and class of worker, and is found in sequence 107. Lines 21 and 22 contain the median annual earnings of firefighters and police officers, respectively.</li>
+                        <li><strong>Which geographies do you want?</strong> There are two decisions here, both associated with the geographic level you want to analyze. First, you need to select the geographic level required for downloading the appropriate ACS geography, then you need to set the geographic summary level for your analysis.
+                        <ul>
+                            <li>If the geographic summary level you are interested in crosses state lines, the data will be contained in the geographic file for the <em>United States</em>. If the geographic summary level you are interested in is fully contained within state lines, the data will be contained in the geographic file for each state. The first table on <a href="http://www2.census.gov/programs-surveys/acs/summary_file/2014/documentation/tech_docs/2014_SummaryFile_Tech_Doc.pdf">page 10</a> in the ACS Technical Documentation can help you determine which file is right for you. Since our analysis will be at the metropolitan statistical area level, we load the 'United States' file. For an example of how to load data for geographies fully contained within state lines - such as cities, Zip codes, school districts, and Congressional districts - see the Appendix below.<br /></li>
+                            <li>Identify the summary code associated with your geographic level of interest by referring to this <a href="https://www.census.gov/geo/maps-data/data/summary_level.html">ACS Geographic Summary Level table</a>. The Summary Level Code for metro areas is 310.</li>
+                        </ul></li>
+                    </ul></p>
+
+                    <h2 class="subsection">Part 2.1: Set parameters</h2>
+                    <p>Based on the above decisions, set your parameters appropriately.</p>
+                    <pre><code>## Set parameters to load ACS data
+year &lt;- 2014
+summaryFileFolder &lt;- &quot;1_year_seq_by_state&quot;
+geoLevelFile &lt;- &quot;United States&quot;
+geoSummaryLevel &lt;- 310
+sequence &lt;- 107
+tableNumber &lt;- &quot;B24011&quot;
+Lines &lt;- c(21, 22)
+acsDrive &lt;- file.path(&quot;http://www2.census.gov&quot;, &quot;programs-surveys&quot;, &quot;acs&quot;, &quot;summary_file&quot;, 
+    as.character(year), &quot;data&quot;)</code></pre>
+
+                    <h2 class="subsection">Part 2.2: Load data tables</h2>
+                    <p>Next we load the ACS and geography tables.</p>
+                    <pre><code>## Load geographies
+geos &lt;- read_csv(file.path(acsDrive, summaryFileFolder, gsub(&quot; &quot;, &quot;&quot;, geoLevelFile, 
+    fixed = TRUE), paste0(&quot;g&quot;, as.character(year), 1, &quot;us&quot;, &quot;.csv&quot;)), col_names = FALSE)
+
+## Load ACS tables
+temp &lt;- tempfile()
+path &lt;- file.path(acsDrive, summaryFileFolder, gsub(&quot; &quot;, &quot;&quot;, geoLevelFile, fixed = TRUE), 
+    paste0(as.character(year), 1, &quot;us&quot;, stri_pad_left(sequence, 4, pad = &quot;0&quot;), 
+        &quot;000&quot;, &quot;.zip&quot;))
+download.file(path, destfile = temp)
+acs &lt;- read_csv(unz(temp, paste0(&quot;e&quot;, as.character(year), &quot;1&quot;, &quot;us&quot;, stri_pad_left(sequence, 
+    4, pad = &quot;0&quot;), &quot;000&quot;, &quot;.txt&quot;)), col_names = FALSE)
+unlink(temp)</code></pre>
+                    
+                    <p>The following command, which appears several times when loading the data, removes spaces from the <em>geoLevelFile</em> name.</p>
+
+                    <pre><code>gsub(&quot; &quot;, &quot;&quot;, geoLevelFile, fixed = TRUE)</code></pre>
+
+                    <p>Similarly, the function <a href="https://cran.r-project.org/web/packages/stringi/stringi.pdf"><em>stri_pad_left</em></a> takes the sequence number and converts it to a character string of a specified length, padding the string with leading characters (zeros in this case).</p>
+
+                    <p>These two functions are particularly important when loading data for sub-state geographies, as described in the Appendix.</p>
+
+                    <h2 class="subsection">Part 2.3: Load variable names</h2>
+                    <p>Then we load the associated variable names.</p>
+
+                    <pre><code>## Download variable and geography names
+temp &lt;- tempfile()
+path &lt;- file.path(acsDrive, paste0(as.character(year), &quot;_1yr_Summary_FileTemplates&quot;, 
+    &quot;.zip&quot;))
+download.file(path, temp)
+
+## Load variable and geography names
+acsNames &lt;- read_excel(unzip(temp, file.path(paste0(as.character(year), &quot;_1yr_Summary_FileTemplates&quot;), 
+    paste0(&quot;Seq&quot;, as.character(sequence), &quot;.xls&quot;))), sheet = &quot;E&quot;)
+
+geoNames &lt;- read_excel(unzip(temp, paste0(as.character(year), &quot;_&quot;, &quot;SFGeoFileTemplate&quot;, 
+    &quot;.xls&quot;)), sheet = 1)
+
+## Close download link
+unlink(temp)</code></pre>
+                    
+                    <h2 class="subsection">Part 2.4: Apply variable names to data tables</h2>
+                    <p>Next we reformat the column names and apply them to the data tables.</p>
+                    <pre><code>## Reformat variable and geography names, then apply them to the data tables
+acsNames &lt;- data.frame(varName = colnames(acsNames), varDesc = t(acsNames[1, 
+    ]))
+geoNames &lt;- data.frame(geoName = colnames(geoNames), geoDesc = t(geoNames[1, 
+    ]))
+colnames(acs) &lt;- acsNames$varName
+colnames(geos) &lt;- geoNames$geoName</code></pre>
+
+                    <h2 class="subsection">Part 2.5: Get rid of data that we don’t need</h2>
+                    <p>Because of the table structure in the ACS FTP, we loaded a lot of ACS data that we don’t actually need for this particular analysis, so let’s keep only the variables that we’re planning on using: The geographic identifier(s) and the data variables.</p>
+
+                    <pre><code>## Keep only variables of interest in ACS data
+acsVars &lt;- paste(tableNumber, as.character(stri_pad_left(Lines, 3, &quot;0&quot;)), sep = &quot;_&quot;)
+acs &lt;- acs[, c(&quot;STUSAB&quot;, &quot;LOGRECNO&quot;, acsVars)]
+acs$STUSAB &lt;- toupper(acs$STUSAB)</code></pre>
+
+                    <p>Similarly, we loaded a lot of geographies that we do not plan on using for this analysis. Let’s get rid of that data. We should also extract the CBSA Code (an integer code associated with each metro area) from the GEOID field in the geography data. You can learn more about understanding the different geographic levels embedded in GEOIDs by reading this <a href="https://www.census.gov/geo/reference/geoidentifiers.html">page</a> and selecting “GEOID Structure for Geographic Areas”.</p>
+
+                    <pre><code>## Keep only geographies of interest
+geos &lt;- subset(geos, SUMLEVEL == geoSummaryLevel)
+geos$CBSACode &lt;- as.integer(substr(geos$GEOID, nchar(geos$GEOID) - 4, nchar(geos$GEOID)))
+geos &lt;- geos[, c(&quot;STUSAB&quot;, &quot;LOGRECNO&quot;, &quot;CBSACode&quot;, &quot;NAME&quot;)]</code></pre>
+
+                    <h2 class="subsection">Part 2.6: Merge the ACS data with geographic identifiers</h2>
+                    <p>Finally, let’s merge the ACS data and the geographic codes.</p>
+
+                    <pre><code>## Merge geos and acs data
+incomes &lt;- merge(geos, acs[, c(&quot;STUSAB&quot;, &quot;LOGRECNO&quot;, acsVars)], by = &quot;LOGRECNO&quot;)</code></pre>
+
+                    <p>Now we have a dataframe, called “incomes,” that contains the median annual earnings for firefighters and police officers for each metro area in 2014. We have successfully loaded and formatted incomes from the ACS and are ready to start loading Zillow data on home values and mortgage rates.</p>
+
+                    <h2 class="subsection">Part 3: Loading median home values and mortgage rates from Zillow</h2>
+                    <p>Zillow publishes monthly median home values for a wide range of geographic levels ranging from the country and U.S. states down to the neighborhood and ZIP code. These and other data are regularly updated on the <a href="http://www.zillow.com/research/data/">Zillow Data</a> page. The median home value (ZHVI) for each geographic level reflects the value of the typical home in each geography, regardless if the home is currently for-sale. It is based on Zillow ‘Zestimates’ of nearly 120 million homes nationwide (as of November 2015). You can read more about how Zillow calculates the median home value and Zestimates <a href="http://www.zillow.com/research/zhvi-methodology-6032/">here</a>, and more about Zillow’s coverage and accuracy <a href="http://www.zillow.com/howto/DataCoverageRentZestimateAccuracy.htm">here</a>.</p>
+
+                    <p>Since the types of homes that transact each month changes, median sale prices tend to be highly volatile due to compositional shifts: For instance, if more condos sell in a given month, and in the next month more mansions sell, then the median sale price will appear to have increased more dramatically over the month than the value of any single home. The ZHVI controls for these compositional changes since it reflects the value of the entire housing stock. However, some researchers prefer median sale or list prices, which are also available on the Zillow Data page.</p>
+
+                    <h2 class="subsection">Part 3.1: Load Zillow data on median home values and mortgage rates</h2>
+                    <p>First, we load Zillow data on median home values at the metro level. We then reshape the data to allow us to merge them with the ACS data on incomes. Since the ACS data correspond to average incomes in 2014, and the Zillow data are a monthly series, we keep only median home values for months in 2014 and take the average across the 12 months of the year.</p>
+
+                    <pre><code>## Load Zillow metro median home values
+zillow &lt;- read_csv(&quot;http://files.zillowstatic.com/research/public/Metro/Metro_Zhvi_AllHomes.csv&quot;, 
+    col_names = TRUE)
+zillow &lt;- melt(zillow, id = c(&quot;RegionID&quot;, &quot;RegionName&quot;, &quot;SizeRank&quot;))
+zillow &lt;- subset(zillow, substr(variable, 1, 4) == &quot;2014&quot;)
+zillow &lt;- ddply(zillow, .(RegionID, RegionName, SizeRank), summarise, MedianHomeValue = mean(value))</code></pre>
+
+                    <p>We then load data on mortgage rates. Zillow publishes the average interest rate quoted for a standard 30-year fixed rate mortgage to a borrower with a good credit score (a FICO score of 720 or higher) on a loan with a loan-to-value ratio of 0.8 or less. This is the most common loan product Americans use to buy homes. The data are reported in 15-minute increments throughout the business day (6 am to 5 pm Pacific Time, excluding federal holidays). Interest rates are reported already multiplied by 100 – a mortgage rate of 4.2% is reported as 4.2 rather than 0.042 in the data – so we divide by 100 to facilitate computation.</p>
+
+                    <pre><code>## Load Zillow data on monthly mortgage rates
+mortgageRate &lt;- read_csv(&quot;http://files.zillowstatic.com/research/public/MortgageRateConventionalFixed.csv&quot;, 
+    col_names = TRUE)
+mortgageRate &lt;- subset(mortgageRate, substr(Date, 1, 4) == &quot;2014&quot;)
+mortgageRate &lt;- ddply(mortgageRate, .(substr(Date, 1, 4)), summarise, avgRate2014 = round(mean(MortgageRateConventionalFixed, 
+    na.rm = TRUE)/100, 3))</code></pre>
+
+                    <h2 class="subsection">Part 3.2: Load a crosswalk between Zillow metro areas and Census metro areas</h2>
+                    <p>The Zillow data include metros with slightly different names than the Census data. A county-level crosswalk between the two naming conventions is available <a href="http://files.zillowstatic.com/research/public/CountyCrossWalk_Zillow.csv">here</a> (metro areas are composed of groups of counties).</p>
+                    <p>For this example, we are only interested in the metro-to-metro crosswalk, not the county-to-metro crosswalk, so we remove county identifiers and remove duplicate rows.</p>
+
+                    <pre><code>## Load Zillow Metro-CBSA crosswalk
+metroXW &lt;- read_csv(&quot;http://files.zillowstatic.com/research/public/CountyCrossWalk_Zillow.csv&quot;, 
+    col_names = TRUE)
+metroXW &lt;- metroXW[, c(&quot;MetroRegionID_Zillow&quot;, &quot;CBSACode&quot;)]
+metroXW &lt;- metroXW[!duplicated(metroXW), ]</code></pre>
+
+                    <p>Finally, we merge the crosswalk onto the Zillow data on median home values</p>
+
+                    <pre><code>## Merge Zillow data on median home values with crosswalk
+zillow &lt;- merge(zillow, metroXW, by.x = &quot;RegionID&quot;, by.y = &quot;MetroRegionID_Zillow&quot;)</code></pre>
+
+                    <h2 class="subsection">Part 4: Computing mortgage affordability</h2>
+                    <p>Merging the Zillow and ACS data is now fairly straightforward:</p>
+                    <pre><code>## Merge Zillow and ACS data
+zillow &lt;- merge(zillow, incomes, by = &quot;CBSACode&quot;)</code></pre>
+
+                    <p>We can then use a standard <a href="http://www.wikihow.com/Calculate-Mortgage-Payments">formula</a> for computing a monthly loan payment based on the loan amount, the interest rate, and the loan amortization (how long before a borrower will pay off the loan). The formula we use is: <span class="math display">\[M=P\frac{r(1 + r)^n}{(1 + r)^n - 1}\]</span> where:
+                    <ul>
+                        <li><strong>M</strong> = the monthly payment, in dollars</li>
+                        <li><strong>P</strong> = the loan principal, or 80% of the home value in this example (the home value minus the down payment)</li>
+                        <li><strong>r</strong> = the monthly interest rate (the annual interest rate divided by 12), and</li>
+                        <li><strong>n</strong> = the number of monthly payments (360 for a 30-year loan)</li>
+                    </ul></p>
+
+                    <p>To make our code easier to read, we implement this using several parameters.</p>
+                    <pre><code>## Calculate monthly mortgage payment
+nperiods &lt;- 360  # mortgage loan term, in months
+compoundingFactor &lt;- (1 + (mortgageRate$avgRate2014/12))^nperiods
+zillow$monthlyPymt &lt;- (0.8 * zillow$MedianHomeValue) * ((mortgageRate$avgRate2014/12) * 
+    compoundingFactor)/(compoundingFactor - 1)</code></pre>
+
+                    <p>The share of a household’s income that would go toward a monthly mortgage payment on the median home in a given metro area is then simply the ratio of the monthly mortgage payment and the monthly income (annual income divided by 12).</p>
+
+                    <pre><code>## Compute monthly payment relative to income
+zillow$MortgagePymtToInc_Firefighters &lt;- zillow$monthlyPymt/(zillow$B24011_021/12)
+zillow$MortgagePymtToInc_Police &lt;- zillow$monthlyPymt/(zillow$B24011_022/12)</code></pre>
+
+                    <p>Of course, in these calculations we made several implicit assumptions. For example, we assume that these households are buying a home with only one income. Many households have two incomes (or more in some rare instances). We also assume the household is buying the median home in the metro area. Some buyers may buy a more or less expensive home. There are many different flavors of mortgage affordability that one could compute, but the basic calculation outlined above provides a reasonable basis for comparison.</p>
+                </section>
+
+                <section id="visual">
+                    <h2 class="sectionhead">Exploring the Results</h2>
+                    <h2 class="subsection">Part 1: Viewing the top/bottom 10 metros for mortgage affordability</h2>
+                    <p>A quick examination of the results shows that Kokomo (IN), Lumberton (NC) and Manitowoc (WI) are the most affordable metro areas for firefighters. Under our assumptions, firefighters in these communities would need to spend less than 7% of their monthly income on his or her mortgage to buy the median home. By contrast, places like Ithaca (NY), Columbia (MO) and Beaver Dam (WI) – as well as larger places like San Jose (CA), San Francisco (CA) and Kahului (HI) – appear to be far less affordable for firefighters with mortgage-payment-to-income ratios in excess of 1, largely due to very low incomes. This means that even if a firefighter spent their entire income on their mortgage, they could not afford to buy the median home (again, assuming a single-income household).</p>
+
+                    <pre><code>## View top/bottom 10 metros for mortgage affordability for firefighters
+head(zillow[order(zillow$MortgagePymtToInc_Firefighters), c(&quot;RegionName&quot;, &quot;B24011_021&quot;, 
+    &quot;MedianHomeValue&quot;, &quot;MortgagePymtToInc_Firefighters&quot;)], 10)</code></pre>
+                    <pre><code class="nohighlight">##          RegionName B24011_021 MedianHomeValue
+## 190      Kokomo, IN      61834        83325.00
+## 224   Manitowoc, WI      70614       106516.67
+## 286  Pottsville, PA      40571        67058.33
+## 249 Nacogdoches, TX      85319       142308.33
+## 264  Ogdensburg, NY      42364        72141.67
+## 278      Peoria, IL      62250       112258.33
+## 357   Texarkana, TX      51414        94591.67
+## 283 Plattsburgh, NY      60170       116591.67
+## 247    Muskogee, OK      33978        65966.67
+## 112      Elmira, NY      43354        87858.33
+##     MortgagePymtToInc_Firefighters
+## 190                     0.06250931
+## 224                     0.06997186
+## 286                     0.07667146
+## 249                     0.07737155
+## 264                     0.07899251
+## 278                     0.08365192
+## 357                     0.08534305
+## 283                     0.08988437
+## 247                     0.09005823
+## 112                     0.09400490</code></pre>
+                    
+                    <pre><code>head(zillow[order(-zillow$MortgagePymtToInc_Firefighters), c(&quot;RegionName&quot;, &quot;B24011_021&quot;, 
+    &quot;MedianHomeValue&quot;, &quot;MortgagePymtToInc_Firefighters&quot;)], 10)</code></pre>
+
+                    <pre><code class="nohighlight">##            RegionName B24011_021 MedianHomeValue
+## 85       Coos Bay, OR          0       152108.33
+## 90        Cullman, AL          0       110908.33
+## 141   Greeneville, TN          0        80691.67
+## 240 Morehead City, NC          0       226100.00
+## 329       Sebring, FL          0        79733.33
+## 348    Statesboro, GA          0       135458.33
+## 351        Sumter, SC          0        81750.00
+## 358  The Villages, FL          0       227366.67
+## 167        Ithaca, NY       2499       187358.33
+## 78       Columbia, MO       2499       150008.33
+##     MortgagePymtToInc_Firefighters
+## 85                             Inf
+## 90                             Inf
+## 141                            Inf
+## 240                            Inf
+## 329                            Inf
+## 348                            Inf
+## 351                            Inf
+## 358                            Inf
+## 167                       3.477791
+## 78                        2.784491</code></pre>
+
+                    <p>For police, Battle Creek and Saginaw, Michigan, along with several communities in upstate New York, appear to be the most affordable communities. Under our assumptions, police officers in these communities would need to spend less than 6% of their monthly income on thier mortgage to buy the median home. At the other extreme, Oak Harbor (WA), Honolulu (HI), San Jose (CA) and Santa Fe (NM) appear to be the least affordable places for police officers.</p>
+
+                    <pre><code>## View top/bottom 10 metros for mortgage affordability for police
+head(zillow[order(zillow$MortgagePymtToInc_Police), c(&quot;RegionName&quot;, &quot;B24011_022&quot;, 
+    &quot;MedianHomeValue&quot;, &quot;MortgagePymtToInc_Police&quot;)], 10)</code></pre>
+
+                    <pre><code class="nohighlight">##           RegionName B24011_022 MedianHomeValue MortgagePymtToInc_Police
+## 30  Battle Creek, MI     100576        87758.33               0.04047536
+## 264   Ogdensburg, NY      70575        72141.67               0.04741677
+## 266        Olean, NY      62715        71716.67               0.05304511
+## 173    Jamestown, NY      64104        74200.00               0.05369273
+## 306      Saginaw, MI      56484        67825.00               0.05570075
+## 286   Pottsville, PA      51930        67058.33               0.05990059
+## 86       Corning, NY      63750        85275.00               0.06204949
+## 351       Sumter, SC      60831        81750.00               0.06233895
+## 209         Lima, OH      63375        85833.33               0.06282532
+## 246     Muskegon, MI      60585        84175.00               0.06444878</code></pre>
+
+                    <h2 class="subsection">Part 2: Mapping mortgage affordability for firefighters and police officers</h2>
+                    <p>To map mortgage affordability for firefighters and police officers across the United States, we use the <em>choroplethrMaps</em> package, which makes it very easy to county-level (and other geographic level) data. Our affordability data in this example are at the metro (CBSA) level, but metros are composed of groups of counties, so we can use county-level maps to visualize the data.</p>
+                    <p>As a first step, we merge our affordability data onto county identifiers.</p>
+
+                    <pre><code>## Load county identifiers
+zillow_county &lt;- read_csv(&quot;http://files.zillowstatic.com/research/public/CountyCrossWalk_Zillow.csv&quot;, 
+    col_names = TRUE)
+
+## Merge affordability data onto county identifiers
+zillow_county &lt;- merge(zillow_county, zillow[, c(&quot;CBSACode&quot;, &quot;MortgagePymtToInc_Firefighters&quot;, 
+    &quot;MortgagePymtToInc_Police&quot;)], by = &quot;CBSACode&quot;, all.x = TRUE)</code></pre>
+
+                    <p><em>ChoroplethrMaps</em> requires county identifiers composed of a concatenated state FIPS code and county FIPS code. County FIPS codes are 3-digits so the <em>stri_pad_left</em> function ensures that leading zeros are inserted between the state FIPS code the county FIPS code when the county FIPS code is less than three digits.</p>
+
+                    <pre><code>## Create a combined state and county FIPS code
+zillow_county$combinedFIPS &lt;- as.integer(paste0(as.character(zillow_county$StateFIPS), 
+    stri_pad_left(as.character(zillow_county$CountyFIPS), 3, &quot;0&quot;)))
+
+## Drop Alaska and Hawaii counties
+zillow_county &lt;- subset(zillow_county, !is.na(CBSACode) &amp; !(StateName %in% c(&quot;Alaska&quot;, 
+    &quot;Hawaii&quot;)))</code></pre>
+
+                    <p>The data that feed <em>choroplethrMaps</em> maps must be formatted with 2 columns: a column for the geographic identifiers and a column with the data to map. We create separate data sets for each of the two occupation groups, drop counties missing affordability data, and rename the columns to meet <em>choroplethrMaps</em> requirements.</p>
+
+                    <pre><code>## Format the affordability data for mapping
+zillow_county_firefighter &lt;- zillow_county[!is.na(zillow_county$MortgagePymtToInc_Firefighters), 
+    c(&quot;combinedFIPS&quot;, &quot;MortgagePymtToInc_Firefighters&quot;)]
+zillow_county_firefighter &lt;- plyr::rename(zillow_county_firefighter, c(combinedFIPS = &quot;region&quot;, 
+    MortgagePymtToInc_Firefighters = &quot;value&quot;))
+
+zillow_county_police &lt;- zillow_county[!is.na(zillow_county$MortgagePymtToInc_Police), 
+    c(&quot;combinedFIPS&quot;, &quot;MortgagePymtToInc_Police&quot;)]
+zillow_county_police &lt;- plyr::rename(zillow_county_police, c(combinedFIPS = &quot;region&quot;, 
+    MortgagePymtToInc_Police = &quot;value&quot;))</code></pre>
+
+                    <p>As a last step before mapping the data, we create a vector with the state names of the contiguous lower 48 U.S. states as an input to the mapping functions.</p>
+
+                    <pre><code>## Create a vector with the names of the lower 48 states
+data(county.regions)
+counties &lt;- county.regions$region
+continental &lt;- county.regions$region[!county.regions$state.name %in% c(&quot;alaska&quot;, 
+    &quot;hawaii&quot;)]</code></pre>
+
+                    <p>Finally, we are able to map the data.</p>
+
+                    <img src="gKo33nijAITTl0BLAHBLAHBLAH">
+                </section>
+
+                <section id="conclusion">
+                    <h2 class="sectionhead">Conclusion</h2>
+                    <p>Some (perhaps) surprising findings are visible in the results. For example, Chicago does very well when it comes to mortgage affordability for police officers, but not great when it comes to mortgage affordability for firefighters. Affordability for both occupational groups is equally bad in Bismark, North Dakota, as it is in coastal California.</p>
+
+                    <p>There is obviously a lot more one could explore in these data. However, the code described above should allow you to do it yourself!</p>
+                </section>
+
+                <section id="appendix">
+                    <h2 class="sectionhead">Appendix: Loading ACS Data for Sub-state Geographies</h2>
+                    <p>Loading data for geographies that are fully contained within state lines requires several modifications to the code example above. Since the ACS FTP file structure uses both full state names (e.g., California) and state abreviations (e.g., CA), we write a loop that loads each state file. Of course, if your analysis requires only geographies in a single state, you can bypass the loop.</p>
+                    <p>Here we provide an example of loading city-level median incomes for firefighters and police officers.</p>
+                    <p>The first step is to load U.S. state names and abreviations, which are conveniently available in the package, <em>datasets</em>. However, we manually bind a state name and abbreviation for the District of Columbia, which is not included in the package data.</p>
+
+                    <pre><code>## Load state names and abreviations
+states &lt;- rbind(data.frame(stateName = state.name,
+                           stateAbrev = state.abb),
+                c('District of Columbia', 'DC'))</code></pre>
+
+                    <p>We then set our parameters as before. We set the <em>geoLevelFile</em> parameter to <em>NULL</em> as it will be replaced by state names. We also set the <em>geoSummaryLevel</em> to 160, which corresponds to <em>State-Place</em>. <a href="https://www.census.gov/geo/reference/gtc/gtc_place.html"><em>State-place</em></a> includes cities, boroughs, towns and villages.</p>
+
+                    <pre><code>## Set parameters to load ACS data, at the city level
+year &lt;- 2014  
+summaryFileFolder &lt;- '1_year_seq_by_state'  
+geoLevelFile &lt;- NULL
+geoSummaryLevel &lt;- 160
+sequence &lt;- 107
+tableNumber &lt;- 'B24011'
+Lines &lt;- c(21, 22)
+acsDrive &lt;- file.path('http://www2.census.gov', 
+                      'programs-surveys', 
+                      'acs', 
+                      'summary_file', 
+                      as.character(year), 
+                      'data')</code></pre>
+
+                    <p>Next, we write a loop to load the ACS and geography tables for each state.</p>
+
+                    <pre><code>## Load geographies, for sub-state geographies
+geos &lt;- data.frame()
+for (i in 1:nrow(states)){
+  geos_temp &lt;- read_csv(file.path(acsDrive, 
+                           summaryFileFolder, 
+                           gsub(&quot; &quot;, &quot;&quot;, states$stateName[i], fixed = TRUE),
+                           paste0('g', as.character(year), 1, 
+                                  tolower(states$stateAbrev[i]), 
+                                  '.csv')), 
+                 col_names = FALSE)
+  geos &lt;- rbind(geos, geos_temp)
+  rm(geos_temp)
+}
+rm(i)
+
+## Load ACS tables, for sub-state geographies
+acs &lt;- data.frame()
+for (i in 1:nrow(states)){
+  temp &lt;- tempfile()
+  path &lt;- file.path(acsDrive,
+                    summaryFileFolder,
+                    gsub(&quot; &quot;, &quot;&quot;, states$stateName[i], fixed = TRUE),
+                    paste0(as.character(year), 1, 
+                           tolower(states$stateAbrev[i]),
+                           stri_pad_left(sequence, 4, pad = '0'),
+                           '000', '.zip'))
+  download.file(path, destfile = temp)
+  acs_temp &lt;- read_csv(unz(temp, 
+                    paste0('e', as.character(year), '1', 
+                           tolower(states$stateAbrev[i]), 
+                           stri_pad_left(sequence, 4, pad = '0'), 
+                           '000', '.txt')), 
+                col_names = FALSE)
+  acs &lt;- rbind(acs, acs_temp)
+  rm(acs_temp)
+  unlink(temp)  
+}
+rm(i)</code></pre>
+                
+                    <p>The rest of the code should run without any changes except for the following: When merging the geography names and the ACS data for sub-state geographies, merge the data frames on both the <em>STUSAB</em> (state abreviation) and <em>LOGRECNO</em> (logical record number) fields rather than just the <em>LOGRECNO</em> field.</p>
+
+                    <pre><code>## Merge geos and acs data, sub-state geographies
+incomes &lt;- merge(geos, acs[, c('STUSAB', 'LOGRECNO', acsVars)], by = c('STUSAB', 'LOGRECNO'))</code></pre>
+                </section>
+
+                </div><!-- Content -->
+                  
+                <div id='sidebar' class="hidden-xs hidden-sm col-lg-2 col-md-2"><!-- Sidebar -->
+                       
+                    <ul id='featured-nav' class="nav nav-list featured-nav nav-stacked">
+                      
+                        
+                        <li>
+                            <ul class="fa-style"><!-- Font Awesome -->
+                               <!-- <li><a href="https://github.com/CommerceDataService/tutorial_ms_powerbi"><i class="fa fa-file-archive-o fa-lg"></i></a></li>
+                                <li><a href="https://github.com/CommerceDataService/tutorial_ms_powerbi"><i class="fa fa-file-code-o fa-lg"></i></a></li>
+                                <li><a href="https://github.com/CommerceDataService/tutorial_ms_powerbi"><i class="fa fa-github-square fa-lg"></i></a></li>-->
+                            </ul>
+                        </li>
+                        <li>
+                            
+                        </li>
+                        <li>
+                            <ul class="fa-style"><!-- Font Awesome -->
+                                <!--<li><a href="https://github.com/CommerceDataService/tutorial_ms_powerbi"><i class="fa fa-file-archive-o fa-lg"></i></a></li>
+                                <li><a href="https://github.com/CommerceDataService/tutorial_ms_powerbi"><i class="fa fa-file-code-o fa-lg"></i></a></li>
+                                <li><a href="https://github.com/CommerceDataService/tutorial_ms_powerbi" title="Github Repo for MS Power BI Part 1"><i class="fa fa-github-square fa-lg"></i></a></li>-->
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fa-style"><!-- Font Awesome -->
+                                <li><a href="https://github.com/CommerceDataService/tutorial_zillow_acs" title="Github Repo for USPTO Tutorial"><i class="fa fa-github-square fa-lg"></i></a></li>
+                                <li><a href="Firefighter Affordability - Zillow.Rmd"  title="Rmarkdown of Getting Started"><i class="fa fa-file-code-o fa-lg"></i></a></li>
+                                <li><a href="https://twitter.com/zillow" title="Twitter handle for Zillow"><i class="fa fa-twitter-square fa-lg"></i></a></li><!-- Haven't added the SNS components -->
+                                <!--<li><a href=""><i class="fa fa-linkedin-square fa-lg"></i></a></li>
+                                <li><a href=""><i class="fa fa-facebook-square fa-lg"></i></a></li>-->
+                            </ul>
+                        </li>
+                        <li><a href="#intro">INTRODUCTION</a></li>
+                        <li><a href="#data">ACQUIRiNG THE DATA</a></li>
+                        <li><a href="#code">GETTING STARTED</a></li>
+                        <li><a href="#visual">VISUALIZE</a></li>
+                        <li><a href="#conclusion">CONCLUSION</a></li>
+                        <li><a href="#appendix">APPENDIX</a></li>
+                        
+                    </ul>
+                </div><!-- Sidebar -->
+            </div><!-- Row -->
+        </div><!-- Container-fluid -->
+    </div>
+
+</body>
+</html>
