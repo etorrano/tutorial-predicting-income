@@ -166,7 +166,7 @@ def download_data(path='data', urls=CENSUS_DATASET):
         response = requests.get(url)
         name = os.path.basename(url)
         with open(os.path.join(path, name), 'w') as f:
-            f.write(response.content)
+            f.write(response.text)
 
 download_data()</code></pre>
 
@@ -210,7 +210,7 @@ download_data()</code></pre>
 # Note: We use a regex trick here for the separator below because the test data
 # have a period appended to the end of the class names.
 data = pd.read_csv('data/adult.data', sep="\s*,", names=names)
-print data.head()</code></pre>
+print (data.head())</code></pre>
 
                     <p>Here's the result:</p>
 
@@ -340,7 +340,7 @@ print data.head()</code></pre>
 
                     <p>Our Pandas dataframe provides us with a convenient method for starting to unpack the data that we have to work with to generate our predictions and to select our features. With feature selection, our goal is to find the smallest set of the available features such that the fitted model will reach it's maximal predictive value. Why? Firstly, minimizing the number of features we include lowers the complexity of the model, in turn reducing bias. Secondly, lower dimensional data takes a lot less computation time. Finally, in practice, models based on smaller sets of variables are frequently also more interpretable.</p>
 
-                    <p>But how can we decide which features are necessary and which are redundant? What's the strongest determinant of income — age, race, or gender? What about education, industry sector, or marital status? Generally with data that is numeric, we use descriptive statistics to explore central tendency, standard deviations, and multicollinearity. However, we can see by glancing at the first 5 rows of our dataframe that we primarily have categorical data (and even with continuous data, statistical methods alone can prove insufficient), so instead we'll use some visual feature analysis tricks.</p>
+                    <p>But how can we decide which features are necessary and which are redundant? What's the strongest determinant of income - age, race, or gender? What about education, industry sector, or marital status? Generally with data that is numeric, we use descriptive statistics to explore central tendency, standard deviations, and multicollinearity. However, we can see by glancing at the first 5 rows of our dataframe that we primarily have categorical data (and even with continuous data, statistical methods alone can prove insufficient), so instead we'll use some visual feature analysis tricks.</p>
 
                 </section>
 
@@ -350,7 +350,7 @@ print data.head()</code></pre>
 
                     <p>Feature analysis is key to successful feature selection for machine learning. Some common approaches to visualizing features to support machine learning, <a href="https://districtdatalabs.silvrback.com/visual-diagnostics-for-more-informed-machine-learning-part-1">which you can read about more here</a>, include boxplots, histograms, scatterplot matrices, and radial visualizations.</p>
 
-                    <p>Our target, <code>data.income</code> is currently constructed as a categorical field. It would be interesting to see the frequencies of each class, relative to the target of our classifier. To do this, we can use the <code>countplot</code> function from the Python visualization package Seaborn to count the occurrences of each data point. Let's take a look at the counts of different categories in <code>data.occupation</code> and in <code>data.education</code> — two likely predictors of income in the Census data:</p>
+                    <p>Our target, <code>data.income</code> is currently constructed as a categorical field. It would be interesting to see the frequencies of each class, relative to the target of our classifier. To do this, we can use the <code>countplot</code> function from the Python visualization package Seaborn to count the occurrences of each data point. Let's take a look at the counts of different categories in <code>data.occupation</code> and in <code>data.education</code> - two likely predictors of income in the Census data:</p>
 
                     <pre><code>sns.countplot(y='occupation', hue='income', data=data,)
 sns.plt.show()</code></pre>

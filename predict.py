@@ -40,7 +40,7 @@ def download_data(path='data', urls=CENSUS_DATASET):
         response = requests.get(url)
         name = os.path.basename(url)
         with open(os.path.join(path, name), 'w') as f:
-            f.write(response.content)
+            f.write(response.text)      ####CHANGED FROM f.write(response.content)
 
 
 ################################################################################
@@ -65,7 +65,7 @@ names = [
 ]
 
 data = pd.read_csv('data/adult.data', sep="\s*,", names=names, engine='python')
-print data.describe()
+print (data.describe())             ####CHANGED FROM print data.describe()
 
 ###############################################################################
 # Visualize
