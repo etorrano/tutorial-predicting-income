@@ -233,7 +233,7 @@ sns.countplot(y='occupation', hue='income', data=data,)
 sns.plt.show()
 ```
 
-![Income counts by occupation](figures/inc_occ.png)
+![Income counts by occupation](inc_occ.png)
 
 
 ```python
@@ -241,7 +241,7 @@ sns.countplot(y='education', hue='income', data=data,)
 sns.plt.show()
 ```
 
-![Income counts by education](figures/inc_edu.png)
+![Income counts by education](inc_edu.png)
 
 
 The `countplot` function accepts either an `x` or a `y` argument to specify if this is a bar plot or a column plot. We chose to use the `y` argument so that the labels would be readable. The `hue` argument specifies a column for comparison; in this case we're concerned with the relationship of our categorical variables to the target income. Go ahead and explore other variables in the dataset, for example `data.race` and `data.sex` to see if those values are predictive of the level of income or not!
@@ -252,7 +252,7 @@ g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'education-num')
 sns.plt.show()
 ```
-![Education and Income by Race](figures/ed_inc_race.png)
+![Education and Income by Race](ed_inc_race.png)
 
 Or let's say we wanted to see how years of education correlates with income for men and for women:    
 ```python
@@ -260,7 +260,7 @@ g = sns.FacetGrid(data, col='sex', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'education-num')
 sns.plt.show()
 ```
-![Education and Income by Sex](figures/ed_inc_sex.png)
+![Education and Income by Sex](ed_inc_sex.png)
 
 The plot above shows us that more education also does not result in the same gains in income for women compared with men.
 
@@ -270,7 +270,7 @@ g = sns.FacetGrid(data, col='race', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'age')
 sns.plt.show()
 ```
-![Age and Income by Race](figures/age_inc_race.png)
+![Age and Income by Race](age_inc_race.png)
 
 As expected, older people generally tend to make more, though that does not appear to hold true for Asian Americans/Pacific Islanders in this dataset.
 
@@ -280,7 +280,7 @@ g = sns.FacetGrid(data, col='marital-status', size=4, aspect=.5)
 g = g.map(sns.boxplot, 'income', 'hours-per-week')
 sns.plt.show()
 ```
-![Hours and Income by Marital Status](figures/hours_inc_marital.png)
+![Hours and Income by Marital Status](hours_inc_marital.png)
 
 Violinplots are often a useful alternative to box-and-whisker plots because they can integrate the information from a traditional boxplot with a kernel density estimate. For example, the two plots below enable us to see the distribution of years of education, hours worked per week, and age for men and women with annual incomes both above and below $50,000.
 
@@ -294,9 +294,9 @@ sns.plt.show()
 sns.violinplot(x='sex', y='age', hue='income', data=data, split=True, scale='count')
 sns.plt.show()
 ```
-![Education and Income by Sex](figures/ed_inc_sex_vio.png)
-![Hours Worked and Income by Sex](figures/hrs_inc_sex_vio.png)
-![Age and Income by Sex Side-by-Side](figures/age_inc_sex_vio.png)
+![Education and Income by Sex](ed_inc_sex_vio.png)
+![Hours Worked and Income by Sex](hrs_inc_sex_vio.png)
+![Age and Income by Sex Side-by-Side](age_inc_sex_vio.png)
 
 These types of visual analyses can be very useful for unpacking an unfamiliar dataset with which one does not have domain expertise, and already we developed several hypotheses for the kinds of combinations of features that are likely to predict a person's income level.
 
